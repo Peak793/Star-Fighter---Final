@@ -2,7 +2,10 @@
 
 Game::Game(int Width, int Height)
 	:window(sf::VideoMode(Width, Height), "StarFighter X")
-	,menu(Width,Height)
+	, menu(Width, Height)
+	, mPlayer(Width, Height)
+	, gsText(Width, Height)
+	, howtoplay(Width, Height)
 {
 	window.setFramerateLimit(120);
 	loadTexture();
@@ -29,7 +32,6 @@ void Game::run() //Run The game
 
 			// Draw Stuff Here
 			render();
-
 			window.display();
 	}
 }
@@ -62,7 +64,6 @@ void Game::pollEvent()
 
 void Game::loadObject()
 {
-
 }
 
 void Game::loadTexture()
@@ -74,12 +75,14 @@ void Game::update()
 {
 	updateMenuState();
 	updateGameState();
+	updateHowtoplayState();
 }
 
 void Game::render()
 {
 	renderMenuState();
 	renderGameState();
+	renderHowtoplayState();
 }
 
 void Game::updateMenuState()
@@ -97,8 +100,9 @@ void Game::updateGameState()
 {
 	if (state == 1)
 	{
-		mPlayer.update(dt, window.getSize().x, window.getSize().y);
+		mPlayer.update(dt, window.getSize().x, window.getSize().y,isGAMESTART);
 		background.update(mPlayer.movementspeed,dt);
+		animationUpdate();
 	}
 }
 
@@ -107,14 +111,46 @@ void Game::renderGameState()
 	if (state == 1)
 	{
 		background.render(window);
+
+		//gsText
+		gsText.render(window);
+		
+		//Player
 		mPlayer.render(window);
+		
 	}
 }
 
 void Game::animationUpdate()
 {
-	//Player
+	if (state == 1)
+	{
+		//gsText
+		gsText.update(dt);
+		if (gsText.isGameStart == true)
+		{
+			isGAMESTART = true;
+		}
+		
+		//Player
+		mPlayer.animation(dt);
+	}
+}
 
+void Game::updateHowtoplayState()
+{
+	if (state == 4)
+	{
+		howtoplay.update(state,dt);
+	}
+}
+
+void Game::renderHowtoplayState()
+{
+	if (state == 4)
+	{
+		howtoplay.render(window);
+	}
 }
 
 void Game::renderMenuState()
@@ -127,7 +163,7 @@ void Game::menuUpdate()
 {
 	if (state == 0)
 	{
-		menu.update(state,window);
+		menu.update(state,window,dt);
 	}
 }
 

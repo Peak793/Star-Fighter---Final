@@ -6,8 +6,8 @@ class Background
 private:
 	sf::Sprite background;
 	sf::Texture bgTex;
-private:
 public:
+	
 public:
 	Background();
 	~Background();

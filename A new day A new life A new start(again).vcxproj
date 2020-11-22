@@ -21,6 +21,8 @@
   <ItemGroup>
     <ClCompile Include="Background.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Gamestart.cpp" />
+    <ClCompile Include="How_to_play.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -28,6 +30,8 @@
   <ItemGroup>
     <ClInclude Include="Background.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="Gamestart.h" />
+    <ClInclude Include="How_to_play.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Player.h" />
   </ItemGroup>

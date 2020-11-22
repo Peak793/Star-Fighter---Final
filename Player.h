@@ -13,29 +13,32 @@ private:
 	sf::Sprite player;
 	sf::IntRect pRect;
 	sf::CircleShape hitbox;
-	sf::Vector2u currentImage;
 
+	float totalTime=0;
+	float switchTime = 0.15;
 private:
 
 public:
 	//bool
 	bool  canShoot = true;
-
+	sf::Vector2u currentImage;
 
 	//spec number
 	float movementspeed = 350;
 	int shootCooldown = 500;
 
 public:
-	Player();
+	Player(float width,float height);
 	~Player();
 
-	void	loadTex();
-	void	initHitbox();
-	void	update(float dt, float winwidth, float winheight);
-	void	render(sf::RenderTarget& target);
-	void	move(float dt,float winwidth,float winheight);
-	void	updateCanShoot(float dt);
+	void					loadTex();
+	void					initHitbox();
+	void					update(float dt, float winwidth, float winheight, bool isGAMESTART);
+	void					render(sf::RenderTarget& target);
+	void					animation(float dt);
+	void					move(float dt,float winwidth,float winheight, bool isGAMESTART);
+	void					updateCanShoot(float dt);
+	sf::FloatRect			getGlobalbounds();
 
 };
 

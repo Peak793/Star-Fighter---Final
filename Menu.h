@@ -19,7 +19,7 @@ private:
 	sf::Text Logo[3];
 	sf::Clock clock;
 	sf::Clock press;
-	int updatelogo = -20;
+
 	
 	//soundtrack
 	sf::Music soundtrack;
@@ -27,21 +27,26 @@ private:
 	//Variables
 	int selectedIndex;
 	bool FontSelect;
+	int updatelogo = -20;
+	float pressTimer = 0;
+	float pressAbleTime = 0.5;
+
 
 public:
+
 
 public:
 	Menu(float Width, float Height);
 	~Menu();
 
 	void	render(sf::RenderTarget &target);
-	void	update(float &state, sf::RenderWindow& window);
+	void	update(float &state, sf::RenderWindow& window,float dt);
 	void	Move();
 
 
 	void	initMenu(float Width, float Height);
 	void	initLogo(float Width, float Height);
 	void	updateLogo();
-	void	pressMenu(float &state, sf::RenderWindow& window);
+	void	pressMenu(float &state, sf::RenderWindow& window,float dt);
 };
 

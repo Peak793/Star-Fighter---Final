@@ -8,7 +8,8 @@
 #include "Menu.h"
 #include "Player.h"
 #include "Background.h"
-
+#include "How_to_play.h"
+#include "Gamestart.h"
 
 class Game
 {
@@ -28,20 +29,26 @@ private:
 	*/
 
 	//Menu state
-	Menu menu;
+			Menu menu;
 
 
 	//Game state
 		//Background
 			Background background;
+		//Gamestar text
+			Gamestart gsText;
 		//Player
 			Player mPlayer;
+	
+	//How to play state
+			How_to_play howtoplay;
 
 
 private:
 
 public:
-	
+	//Game state
+			bool isGAMESTART = false;
 public:
 	Game(int Width, int Height);
 	~Game();
@@ -65,5 +72,9 @@ public:
 	void		updateGameState();
 	void		renderGameState();
 	void		animationUpdate();
+
+	//How to play
+	void		updateHowtoplayState();
+	void		renderHowtoplayState();
 };
 

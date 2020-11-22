@@ -46,11 +46,11 @@ void Menu::render(sf::RenderTarget &target)
 		}
 }
 
-void Menu::update(float &state,sf::RenderWindow &window)
+void Menu::update(float &state,sf::RenderWindow &window,float dt)
 {
 		Move();
 		updateLogo();
-		pressMenu(state,window);
+		pressMenu(state,window,dt);
 }
 
 void Menu::Move()
@@ -166,20 +166,25 @@ void Menu::updateLogo()
 		}
 }
 
-void Menu::pressMenu(float &state,sf::RenderWindow &window)
+void Menu::pressMenu(float &state,sf::RenderWindow &window,float dt)
 {
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && press.getElapsedTime().asMilliseconds() >= 200)
+	if (pressTimer < pressAbleTime)
 	{
+		pressTimer += dt;
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && pressTimer >= pressAbleTime)
+	{
+		pressTimer -= pressAbleTime;
 		switch (selectedIndex)
 		{
 		case 0:
 			state = 1;
 			break;
 		case 1:
-			state = 2;
+			state = 4;
 			break;
 		case 2:
-			state = 3;
+			state = 5;
 			break;
 		case 3:
 			window.close();
