@@ -33,13 +33,21 @@ private:
 
 
 	//Game state
+		
 		//Background
 			Background background;
+		
 		//Gamestar text
 			Gamestart gsText;
+		
 		//Player
 			Player mPlayer;
+
+		//Bullet
+			sf::Texture bTex;
+
 	
+
 	//How to play state
 			How_to_play howtoplay;
 

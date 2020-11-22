@@ -68,7 +68,7 @@ void Game::loadObject()
 
 void Game::loadTexture()
 {
-
+	bTex.loadFromFile("img/Bullet.png");
 }
 
 void Game::update()
