@@ -4,16 +4,19 @@ class Bullet
 {
 private:
 	sf::RectangleShape shape;
-
-
-public:
+	float bulletSpeed = 1000;
 
 public:
-	Bullet();
+
+public:
+	Bullet(sf::Texture &texture,sf::Vector2f playerPos);
 	~Bullet();
 
-	void			update();
+	void			update(float dt);
 	void			render(sf::RenderTarget &target);
+
+	sf::Vector2f	getPos();
+	sf::FloatRect	getGlobalBounds();
 };
 
 

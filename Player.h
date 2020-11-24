@@ -4,7 +4,7 @@
 #include "SFML/Audio.hpp"
 #include "SFML/System.hpp"
 #define ROW 3
-#define Collum 6
+#define Collum 8
 class Player
 {
 private:
@@ -16,17 +16,22 @@ private:
 
 	float totalTime=0;
 	float switchTime = 0.15;
-private:
 
 public:
-	//bool
-	bool  canShoot = true;
+	//Variables
+	bool isTurnLeft = false;
+	bool isTurnRight = false;
+	bool isDamaged = false;
+	float damgedTotalTime = 0;
+	float invincibleTime = 0.5;
+
+
 	sf::Vector2u currentImage;
 
 	//spec number
 	float movementspeed = 350;
 	int shootCooldown = 500;
-
+	float totaltime=0;
 public:
 	Player(float width,float height);
 	~Player();
@@ -37,8 +42,8 @@ public:
 	void					render(sf::RenderTarget& target);
 	void					animation(float dt);
 	void					move(float dt,float winwidth,float winheight, bool isGAMESTART);
-	void					updateCanShoot(float dt);
 	sf::FloatRect			getGlobalbounds();
+	sf::Vector2f			getPos();
 
 };
 

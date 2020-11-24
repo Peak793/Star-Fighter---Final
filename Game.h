@@ -10,7 +10,9 @@
 #include "Background.h"
 #include "How_to_play.h"
 #include "Gamestart.h"
-
+#include "Bullet.h"
+#include "Fire.h"
+#include "SpawnEnemies.h"
 class Game
 {
 private:
@@ -33,6 +35,9 @@ private:
 
 
 	//Game state
+		//Variables
+			int score = 0;;
+			float gameLV = 0;
 		
 		//Background
 			Background background;
@@ -45,7 +50,11 @@ private:
 
 		//Bullet
 			sf::Texture bTex;
+			Fire fire;
 
+		//Enemies
+			sf::Texture eTex;
+			SpawnEnemies spawnEne;
 	
 
 	//How to play state
@@ -80,6 +89,7 @@ public:
 	void		updateGameState();
 	void		renderGameState();
 	void		animationUpdate();
+	void		updateGameLV();
 
 	//How to play
 	void		updateHowtoplayState();

@@ -64,11 +64,13 @@ void Game::pollEvent()
 
 void Game::loadObject()
 {
+
 }
 
 void Game::loadTexture()
 {
 	bTex.loadFromFile("img/Bullet.png");
+	eTex.loadFromFile("img/Enemy.png");
 }
 
 void Game::update()
@@ -98,11 +100,18 @@ void Game::changeState()
 
 void Game::updateGameState()
 {
-	if (state == 1)
+	updateGameLV();
+	if (state == 1 )
 	{
 		mPlayer.update(dt, window.getSize().x, window.getSize().y,isGAMESTART);
 		background.update(mPlayer.movementspeed,dt);
 		animationUpdate();
+	}
+
+	if (state == 1 and isGAMESTART == true)
+	{
+		fire.update(dt,mPlayer,bTex);
+		spawnEne.update(dt,600,eTex,gameLV);
 	}
 }
 
@@ -115,8 +124,14 @@ void Game::renderGameState()
 		//gsText
 		gsText.render(window);
 		
+		//Fire
+		fire.render(window);
+
 		//Player
 		mPlayer.render(window);
+
+		spawnEne.render(window);
+		
 		
 	}
 }
@@ -135,6 +150,11 @@ void Game::animationUpdate()
 		//Player
 		mPlayer.animation(dt);
 	}
+}
+
+void Game::updateGameLV()
+{
+	gameLV = score / 10000;
 }
 
 void Game::updateHowtoplayState()

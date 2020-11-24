@@ -23,7 +23,7 @@ Player::~Player()
 
 void Player::loadTex()
 {
-	if(!pTex.loadFromFile("img/PlayerSprite3.png"));
+	if(!pTex.loadFromFile("img/PlayerV2.png"));
 	{
 		//handle error
 	}
@@ -33,14 +33,13 @@ void Player::initHitbox()
 {
 	hitbox.setRadius(20.f);
 	hitbox.setFillColor(sf::Color::Transparent);
-	hitbox.setOutlineColor(sf::Color::Red);
+	hitbox.setOutlineColor(sf::Color::Transparent);
 	hitbox.setOutlineThickness(1.f);
 	hitbox.setOrigin(hitbox.getRadius(),hitbox.getRadius());
 }
 
 void Player::update(float dt,float winwidth,float winheight, bool isGAMESTART)
 {
-	updateCanShoot(dt);
 	move(dt,winwidth,winheight,isGAMESTART);
 }
 
@@ -50,12 +49,36 @@ void Player::move(float dt, float winwidth, float winheight,bool isGAMESTART)
 	{
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 			player.move(0, -movementspeed * dt);
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 			player.move(0, movementspeed * dt);
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+		{
+			isTurnLeft = true;
+			currentImage.y = 1;
 			player.move(-movementspeed * dt, 0);
+		}
+		else
+		{
+			isTurnLeft = false;
+		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+		{
+			isTurnRight = true;
+			currentImage.y = 2;
 			player.move(movementspeed * dt, 0);
+		}
+		else
+		{
+			isTurnRight = false;
+		}
+		if (isTurnLeft == true and isTurnRight == true)
+		{
+			currentImage.y = 0;
+		}
+		else if (isTurnLeft == false and isTurnRight == false)
+		{
+			currentImage.y = 0;
+		}
 
 		if (player.getPosition().x < 0 + (pRect.width / 2))
 			player.setPosition(0 + (pRect.width / 2), player.getPosition().y);
@@ -69,23 +92,14 @@ void Player::move(float dt, float winwidth, float winheight,bool isGAMESTART)
 	}
 }
 
-void Player::updateCanShoot(float dt)
-{
-	if (canShoot == false and canShootTimer.getElapsedTime().asMilliseconds() >= shootCooldown)
-	{
-		canShoot = true;
-	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && canShoot == true)
-	{
-		canShoot = false;
-		canShootTimer.restart();
-	}
-
-}
-
 sf::FloatRect Player::getGlobalbounds()
 {
 	return sf::FloatRect(hitbox.getGlobalBounds());
+}
+
+sf::Vector2f Player::getPos()
+{
+	return sf::Vector2f(player.getPosition());
 }
 
 void Player::render(sf::RenderTarget& target)
@@ -103,7 +117,7 @@ void Player::animation(float dt)
 		totalTime -= switchTime;
 		currentImage.x++;
 
-		if (currentImage.x >= 4)
+		if (currentImage.x >= 4 and isDamaged == false)
 		{
 			currentImage.x = 0;
 		}
