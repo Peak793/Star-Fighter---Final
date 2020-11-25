@@ -7,7 +7,7 @@ private:
 	float bulletSpeed = 1000;
 
 public:
-
+	int damage = 1;
 public:
 	Bullet(sf::Texture &texture,sf::Vector2f playerPos);
 	~Bullet();

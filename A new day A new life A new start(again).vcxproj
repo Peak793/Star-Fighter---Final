@@ -19,30 +19,42 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AddExplo.cpp" />
     <ClCompile Include="Background.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Collision.cpp" />
     <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="Enemybullet.cpp" />
+    <ClCompile Include="explode.cpp" />
     <ClCompile Include="Fire.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GamePause.cpp" />
     <ClCompile Include="Gamestart.cpp" />
     <ClCompile Include="How_to_play.cpp" />
+    <ClCompile Include="HpUp.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="SpawnEbullet.cpp" />
     <ClCompile Include="SpawnEnemies.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AddExplo.h" />
     <ClInclude Include="Background.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="Collision.h" />
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="Enemybullet.h" />
+    <ClInclude Include="explode.h" />
     <ClInclude Include="Fire.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="GamePause.h" />
     <ClInclude Include="Gamestart.h" />
     <ClInclude Include="How_to_play.h" />
+    <ClInclude Include="HpUp.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="SpawnEbullet.h" />
     <ClInclude Include="SpawnEnemies.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

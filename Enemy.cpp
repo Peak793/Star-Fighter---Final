@@ -2,7 +2,7 @@
 
 Enemy::Enemy(sf::Texture &texture,sf::Vector2f spawnPos,float LV)
 {
-	hp = LV + 1;
+	hp = LV + 2;
 	damage = 1 + LV;
 	eSprite.setTexture(texture);
 	imageCount.x = 16;
@@ -16,14 +16,21 @@ Enemy::Enemy(sf::Texture &texture,sf::Vector2f spawnPos,float LV)
 	eSprite.setTextureRect(eRect);
 	spawnPosition = spawnPos;
 	eSprite.setPosition(spawnPosition.x, -100);
+	bulletMax = 2 + LV;
+	bulletcount = bulletMax;
+	canshootTime = 1-LV;
 }
 
 Enemy::~Enemy()
 {
 }
 
-void Enemy::update(float dt,float width)
+void Enemy::update(float dt,float width,float LV)
 {
+	canshootTime = 1 - (LV/2);
+	if (canshootTime < 0.5)
+		canshootTime = 0.5;
+	updateCanshoot(dt);
 	if (eSprite.getPosition().y < spawnPosition.y)
 	{
 		eSprite.move(0,dt * 300);
@@ -49,11 +56,54 @@ void Enemy::update(float dt,float width)
 			}
 		}
 	}
+	animation(dt);
 }
 
 void Enemy::render(sf::RenderTarget& target)
 {
 	target.draw(eSprite);
+}
+
+void Enemy::animation(float dt)
+{
+	if (totalTime < switchTime)
+	{
+		totalTime += dt;
+	}
+	if (totalTime >= switchTime)
+	{
+		 currentImage.y = 0;
+		totalTime -= switchTime;
+		currentImage.x ++;
+		if (currentImage.x >= imageCount.x)
+		{
+			currentImage.x = 0;
+		}
+		if (isHit == true)
+		{
+			currentImage.y = 1;
+			isHit = false;
+		}
+	}
+	eRect.left = currentImage.x * eRect.width;
+	eRect.top = currentImage.y * eRect.height;
+	eSprite.setTextureRect(eRect);
+}
+
+void Enemy::updateCanshoot(float dt)
+{
+	if (canshoot == false)
+	{
+		if (shootTimer < canshootTime)
+		{
+			shootTimer += dt;
+		}
+		else
+		{
+			shootTimer -= canshootTime;
+			canshoot = true;
+		}
+	}
 }
 
 sf::Vector2f Enemy::getPos()

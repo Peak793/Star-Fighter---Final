@@ -32,6 +32,7 @@ void Game::run() //Run The game
 
 			// Draw Stuff Here
 			render();
+
 			window.display();
 	}
 }
@@ -39,6 +40,7 @@ void Game::run() //Run The game
 void Game::updateDt()
 {
 	dt = dtClock.restart().asSeconds();
+
 }
 
 
@@ -69,8 +71,20 @@ void Game::loadObject()
 
 void Game::loadTexture()
 {
-	bTex.loadFromFile("img/Bullet.png");
-	eTex.loadFromFile("img/Enemy.png");
+	if (!bTex.loadFromFile("img/Bullet.png"))
+	{
+		//handle error
+	}
+
+	if (!eTex.loadFromFile("img/Enemy.png"))
+	{
+		//handle error
+	}
+
+	if (!ebulletTex.loadFromFile("img/Ebuletsprites.png"))
+	{
+		//handle error
+	}
 }
 
 void Game::update()
@@ -112,6 +126,9 @@ void Game::updateGameState()
 	{
 		fire.update(dt,mPlayer,bTex);
 		spawnEne.update(dt,600,eTex,gameLV);
+		SpawnEB.update(dt,spawnEne,ebulletTex,gameLV);
+		collisionupdate();
+		ADEX.update(dt);
 	}
 }
 
@@ -132,7 +149,11 @@ void Game::renderGameState()
 
 		spawnEne.render(window);
 		
-		
+		//Ebullet
+		SpawnEB.render(window);
+
+		//Dead Animation
+		ADEX.render(window);
 	}
 }
 
@@ -155,6 +176,12 @@ void Game::animationUpdate()
 void Game::updateGameLV()
 {
 	gameLV = score / 10000;
+}
+
+void Game::collisionupdate()
+{
+	collision.bulletAndenemies(fire,spawnEne,score,ADEX,eTex);
+	collision.EbulletAndPlayer(mPlayer,SpawnEB);
 }
 
 void Game::updateHowtoplayState()

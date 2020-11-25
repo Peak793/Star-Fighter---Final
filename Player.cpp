@@ -31,7 +31,7 @@ void Player::loadTex()
 
 void Player::initHitbox()
 {
-	hitbox.setRadius(20.f);
+	hitbox.setRadius(3.f);
 	hitbox.setFillColor(sf::Color::Transparent);
 	hitbox.setOutlineColor(sf::Color::Transparent);
 	hitbox.setOutlineThickness(1.f);

@@ -19,6 +19,7 @@ private:
 
 public:
 	//Variables
+	int hp = 10;
 	bool isTurnLeft = false;
 	bool isTurnRight = false;
 	bool isDamaged = false;

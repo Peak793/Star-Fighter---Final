@@ -13,6 +13,9 @@
 #include "Bullet.h"
 #include "Fire.h"
 #include "SpawnEnemies.h"
+#include "Collision.h"
+#include "SpawnEbullet.h"
+#include "AddExplo.h"
 class Game
 {
 private:
@@ -55,9 +58,18 @@ private:
 		//Enemies
 			sf::Texture eTex;
 			SpawnEnemies spawnEne;
-	
 
-	//How to play state
+		//Enemy's bullets
+			sf::Texture ebulletTex;
+			SpawnEbullet SpawnEB;
+	
+		//Collision
+			Collision collision;
+
+		//Dead animation
+			AddExplo ADEX;
+
+		//How to play state
 			How_to_play howtoplay;
 
 
@@ -90,6 +102,7 @@ public:
 	void		renderGameState();
 	void		animationUpdate();
 	void		updateGameLV();
+	void		collisionupdate();
 
 	//How to play
 	void		updateHowtoplayState();

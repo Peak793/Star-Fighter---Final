@@ -16,7 +16,6 @@ void Background::update(float playerSpeed,float dt)
 	background.move(0,(playerSpeed/2)*dt);
 	if (background.getPosition().y >= 0)
 	{
-		std::cout << "Restart" << std::endl;
 		background.setPosition(0,-900);
 	}
 }
