@@ -16,6 +16,7 @@
 #include "Collision.h"
 #include "SpawnEbullet.h"
 #include "AddExplo.h"
+#include "UI.h"
 class Game
 {
 private:
@@ -72,6 +73,9 @@ private:
 		//How to play state
 			How_to_play howtoplay;
 
+		//Ui
+			UI ui;
+
 
 private:
 
@@ -102,7 +106,7 @@ public:
 	void		renderGameState();
 	void		animationUpdate();
 	void		updateGameLV();
-	void		collisionupdate();
+	void		collisionupdate(float gameLV);
 
 	//How to play
 	void		updateHowtoplayState();

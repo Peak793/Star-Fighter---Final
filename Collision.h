@@ -15,7 +15,7 @@ public:
 	~Collision();
 	
 
-	void				bulletAndenemies(Fire &bullet,SpawnEnemies &enemy,int &score,AddExplo &ADEX,sf::Texture& texture);
+	void				bulletAndenemies(Fire &bullet,SpawnEnemies &enemy,int &score,AddExplo &ADEX,sf::Texture& texture,int LV);
 	void				EbulletAndPlayer(Player &player,SpawnEbullet &EB);
 };
 

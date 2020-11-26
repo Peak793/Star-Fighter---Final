@@ -18,7 +18,7 @@ Enemy::Enemy(sf::Texture &texture,sf::Vector2f spawnPos,float LV)
 	eSprite.setPosition(spawnPosition.x, -100);
 	bulletMax = 2 + LV;
 	bulletcount = bulletMax;
-	canshootTime = 1-LV;
+	canshootTime = 3-LV;
 }
 
 Enemy::~Enemy()
@@ -27,9 +27,9 @@ Enemy::~Enemy()
 
 void Enemy::update(float dt,float width,float LV)
 {
-	canshootTime = 1 - (LV/2);
-	if (canshootTime < 0.5)
-		canshootTime = 0.5;
+	canshootTime = 3 - (LV);
+	if (canshootTime < 1)
+		canshootTime = 1;
 	updateCanshoot(dt);
 	if (eSprite.getPosition().y < spawnPosition.y)
 	{

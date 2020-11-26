@@ -37,6 +37,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="SpawnEbullet.cpp" />
     <ClCompile Include="SpawnEnemies.cpp" />
+    <ClCompile Include="UI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AddExplo.h" />
@@ -56,6 +57,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="SpawnEbullet.h" />
     <ClInclude Include="SpawnEnemies.h" />
+    <ClInclude Include="UI.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

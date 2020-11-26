@@ -7,7 +7,7 @@ Collision::~Collision()
 {
 }
 
-void Collision::bulletAndenemies(Fire& B, SpawnEnemies& E,int &score,AddExplo &ADEX,sf::Texture &texture)
+void Collision::bulletAndenemies(Fire& B, SpawnEnemies& E,int &score,AddExplo &ADEX,sf::Texture &texture,int LV)
 {
 	for (int i = 0; i < B.bullets.size(); i++)
 	{
@@ -23,7 +23,7 @@ void Collision::bulletAndenemies(Fire& B, SpawnEnemies& E,int &score,AddExplo &A
 					ADEX.DeadAni(texture, E.enemies[k].getPos());
 					E.enemies.erase(E.enemies.begin()+k);
 					E.enemiesCount--;
-					score += 100;
+					score += 100+(LV*100);
 					break;
 				}
 				break;

@@ -3,6 +3,7 @@
 Player::Player(float width,float height)
 {
 	loadTex();
+	hp = hpMax;
 	player.setTexture(pTex);
 	pRect.width = pTex.getSize().x / Collum;
 	pRect.height = pTex.getSize().y / ROW;
@@ -31,7 +32,7 @@ void Player::loadTex()
 
 void Player::initHitbox()
 {
-	hitbox.setRadius(3.f);
+	hitbox.setRadius(5.f);
 	hitbox.setFillColor(sf::Color::Transparent);
 	hitbox.setOutlineColor(sf::Color::Transparent);
 	hitbox.setOutlineThickness(1.f);

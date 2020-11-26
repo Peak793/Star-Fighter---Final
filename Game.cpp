@@ -127,8 +127,9 @@ void Game::updateGameState()
 		fire.update(dt,mPlayer,bTex);
 		spawnEne.update(dt,600,eTex,gameLV);
 		SpawnEB.update(dt,spawnEne,ebulletTex,gameLV);
-		collisionupdate();
+		collisionupdate(gameLV);
 		ADEX.update(dt);
+		ui.update(dt,mPlayer.hp,mPlayer.hpMax,score);
 	}
 }
 
@@ -154,6 +155,8 @@ void Game::renderGameState()
 
 		//Dead Animation
 		ADEX.render(window);
+		if(isGAMESTART == true)
+			ui.render(window);
 	}
 }
 
@@ -175,12 +178,12 @@ void Game::animationUpdate()
 
 void Game::updateGameLV()
 {
-	gameLV = score / 10000;
+	gameLV = score / 5000;
 }
 
-void Game::collisionupdate()
+void Game::collisionupdate(float LV)
 {
-	collision.bulletAndenemies(fire,spawnEne,score,ADEX,eTex);
+	collision.bulletAndenemies(fire,spawnEne,score,ADEX,eTex,LV);
 	collision.EbulletAndPlayer(mPlayer,SpawnEB);
 }
 

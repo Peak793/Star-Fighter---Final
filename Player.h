@@ -19,7 +19,8 @@ private:
 
 public:
 	//Variables
-	int hp = 10;
+	int hpMax = 10;
+	int hp = 0;
 	bool isTurnLeft = false;
 	bool isTurnRight = false;
 	bool isDamaged = false;
