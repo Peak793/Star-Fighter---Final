@@ -28,10 +28,25 @@ void Collision::bulletAndenemies(Fire& B, SpawnEnemies& E,int &score,AddExplo &A
 					drop.drop(E.enemies[k].getPos(),dt);
 					E.enemies.erase(E.enemies.begin()+k);
 					E.enemiesCount--;
-					if(B.isUltiPlaying == false)
 						score += 100+(LV*100);
 					break;
 				}
+				break;
+			}
+		}
+	}
+	for (int i = 0; i < B.ultis.size(); i++)
+	{
+		for (int j = 0; j < E.enemies.size(); j++)
+		{
+			if (B.ultis[i].ulti.getGlobalBounds().intersects(E.enemies[j].getGlobalBounds()))
+			{
+				ADEX.DeadAni(texture, E.enemies[j].getPos());
+				drop.randomChance();
+				drop.drop(E.enemies[j].getPos(), dt);
+				E.enemies.erase(E.enemies.begin()+j);
+				E.enemiesCount--;
+				score += 100 + (LV * 100);
 				break;
 			}
 		}
@@ -87,6 +102,21 @@ void Collision::itemAndPlayer(Player& player, itemDropping& drop)
 				player.hp = 10;
 			drop.item1.erase(drop.item1.begin()+ i);
 			break;
+		}
+	}
+}
+
+void Collision::ultiAndEbullet(Fire& bullet, SpawnEbullet& EB)
+{
+	for (int i = 0; i < bullet.ultis.size(); i++)
+	{
+		for (int j = 0; j < EB.Ebullets.size(); j++)
+		{
+			if (bullet.ultis[i].ulti.getGlobalBounds().intersects(EB.Ebullets[j].getGlobalBounds()))
+			{
+				EB.Ebullets.erase(EB.Ebullets.begin()+j);
+				break;
+			}
 		}
 	}
 }

@@ -129,7 +129,7 @@ void Game::updateGameState()
 
 	if (state == 1 and isGAMESTART == true)
 	{
-		fire.update(dt,mPlayer,bTex,ultiTex);
+		fire.update(dt,mPlayer,bTex,ultiTex,SpawnEB);
 		spawnEne.update(dt,600,eTex,gameLV);
 		SpawnEB.update(dt,spawnEne,ebulletTex,gameLV);
 		collisionupdate(gameLV);
@@ -197,6 +197,7 @@ void Game::collisionupdate(float LV)
 	collision.EbulletAndPlayer(mPlayer,SpawnEB); 
 	collision.EnemiesAndPlayer(mPlayer,spawnEne,ADEX,eTex);
 	collision.itemAndPlayer(mPlayer,drop);
+	collision.ultiAndEbullet(fire,SpawnEB);
 }
 
 void Game::updateHowtoplayState()

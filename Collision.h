@@ -19,5 +19,6 @@ public:
 	void				EbulletAndPlayer(Player &player,SpawnEbullet &EB);
 	void				EnemiesAndPlayer(Player &player,SpawnEnemies &enemy,AddExplo &ADEX,sf::Texture &texture);
 	void				itemAndPlayer(Player &player,itemDropping &drop);
+	void				ultiAndEbullet(Fire& bullet,SpawnEbullet& EB);
 };
 

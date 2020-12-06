@@ -4,6 +4,7 @@
 #include "Bullet.h"
 #include "Player.h"
 #include "Ulti.h"
+#include "SpawnEbullet.h"
 class Fire
 {
 public:
@@ -20,7 +21,7 @@ public:
 	Fire();
 	~Fire();
 
-	void update(float dt,Player &player,sf::Texture &bullTex,sf::Texture &ultiTex);
+	void update(float dt,Player &player,sf::Texture &bullTex,sf::Texture &ultiTex,SpawnEbullet &EB);
 	void render(sf::RenderTarget &target);
 };
 

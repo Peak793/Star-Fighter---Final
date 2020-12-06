@@ -10,7 +10,7 @@ Fire::~Fire()
 
 }
 
-void Fire::update(float dt, Player& player, sf::Texture& texture,sf::Texture& ultiTex)
+void Fire::update(float dt, Player& player, sf::Texture& texture,sf::Texture& ultiTex, SpawnEbullet& EB)
 {
 	if (totalTime < cooldown)
 	{
@@ -26,6 +26,7 @@ void Fire::update(float dt, Player& player, sf::Texture& texture,sf::Texture& ul
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) and isUltiReady == true)
 	{
+		EB.Ebullets.clear();
 		std::cout << "Fire ULT" << std::endl;
 		isUltiReady = false;
 		isUltiPlaying = true;
