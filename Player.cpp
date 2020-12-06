@@ -32,9 +32,9 @@ void Player::loadTex()
 
 void Player::initHitbox()
 {
-	hitbox.setRadius(5.f);
+	hitbox.setRadius(10.f);
 	hitbox.setFillColor(sf::Color::Transparent);
-	hitbox.setOutlineColor(sf::Color::Transparent);
+	hitbox.setOutlineColor(sf::Color::Red);
 	hitbox.setOutlineThickness(1.f);
 	hitbox.setOrigin(hitbox.getRadius(),hitbox.getRadius());
 }
@@ -112,15 +112,30 @@ void Player::render(sf::RenderTarget& target)
 void Player::animation(float dt)
 {
 	totalTime += dt;
-
+	if (isDamaged == true)
+	{
+		hittime += dt;
+		if (hittime > hitCooldown)
+		{
+			hittime = 0;
+			isDamaged = false;
+		}
+		if (currentImage.x < 4)
+		{
+			currentImage.x = 4;
+		}
+	}
 	if (totalTime >= switchTime)
 	{
 		totalTime -= switchTime;
 		currentImage.x++;
-
 		if (currentImage.x >= 4 and isDamaged == false)
 		{
 			currentImage.x = 0;
+		}
+		else if (currentImage.x >= 8 and isDamaged == true)
+		{
+			currentImage.x = 4;
 		}
 	}
 	pRect.left = currentImage.x * pRect.width;

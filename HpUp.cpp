@@ -1,17 +1,18 @@
 #include "HpUp.h"
 
-HpUp::HpUp(sf::Vector2f EnemyPos)
+HpUp::HpUp(sf::Vector2f EnemyPos,sf::Texture& hpitemTexture)
 {
-	if (!texture.loadFromFile("img/Powerup_Health_png_processed.png"))
-	{
-		//handle error
-	}
-	hpitem.setTexture(texture);
+	hpitem.setTexture(hpitemTexture);
 	hpitem.setPosition(EnemyPos);
 }
 
 HpUp::~HpUp()
 {
+}
+
+sf::FloatRect HpUp::getGlobalBounds()
+{
+	return sf::FloatRect(hpitem.getGlobalBounds());
 }
 
 void HpUp::update(float dt)

@@ -7,7 +7,7 @@ class itemDropping
 public:
 	bool isDrop = false;
 	int tempNumber = 0;
-	float changePercentage = 20;
+	float changePercentage = 10;
 	
 	/*
 		item list
@@ -15,7 +15,10 @@ public:
 			2 Shield
 	*/
 	std::vector<HpUp>item1;
+	
 
+	//All of the item texture
+	sf::Texture hpitem;
 public:
 	itemDropping();
 	~itemDropping();

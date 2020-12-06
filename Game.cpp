@@ -6,6 +6,7 @@ Game::Game(int Width, int Height)
 	, mPlayer(Width, Height)
 	, gsText(Width, Height)
 	, howtoplay(Width, Height)
+	, ui(mPlayer.getPos())
 {
 	window.setFramerateLimit(120);
 	loadTexture();
@@ -40,7 +41,6 @@ void Game::run() //Run The game
 void Game::updateDt()
 {
 	dt = dtClock.restart().asSeconds();
-
 }
 
 
@@ -85,6 +85,11 @@ void Game::loadTexture()
 	{
 		//handle error
 	}
+
+	if (!ultiTex.loadFromFile("img/ultimate.png"))
+	{
+		//handle error
+	}
 }
 
 void Game::update()
@@ -124,12 +129,12 @@ void Game::updateGameState()
 
 	if (state == 1 and isGAMESTART == true)
 	{
-		fire.update(dt,mPlayer,bTex);
+		fire.update(dt,mPlayer,bTex,ultiTex);
 		spawnEne.update(dt,600,eTex,gameLV);
 		SpawnEB.update(dt,spawnEne,ebulletTex,gameLV);
 		collisionupdate(gameLV);
 		ADEX.update(dt);
-		ui.update(dt,mPlayer.hp,mPlayer.hpMax,score);
+		ui.update(dt,mPlayer.hp,mPlayer.hpMax,score,mPlayer.getPos(),mPlayer.abilityCount);
 		drop.update(dt);
 	}
 }
@@ -188,9 +193,10 @@ void Game::updateGameLV()
 
 void Game::collisionupdate(float LV)
 {
-	collision.bulletAndenemies(fire,spawnEne,score,ADEX,eTex,LV,drop,dt);
-	collision.EbulletAndPlayer(mPlayer,SpawnEB);
+	collision.bulletAndenemies(fire,spawnEne,score,ADEX,eTex,LV,drop,dt,mPlayer);
+	collision.EbulletAndPlayer(mPlayer,SpawnEB); 
 	collision.EnemiesAndPlayer(mPlayer,spawnEne,ADEX,eTex);
+	collision.itemAndPlayer(mPlayer,drop);
 }
 
 void Game::updateHowtoplayState()

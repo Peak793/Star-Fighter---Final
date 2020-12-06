@@ -3,6 +3,7 @@
 itemDropping::itemDropping()
 {
 	srand(time(NULL));
+	hpitem.loadFromFile("img/Powerup_Health_png_processed.png");
 }
 
 itemDropping::~itemDropping()
@@ -16,7 +17,7 @@ void itemDropping::drop(sf::Vector2f Epos,float dt)
 		int temp = rand() % 3000;
 		if (temp < 3000)
 		{
-			item1.push_back(HpUp(Epos));
+			item1.push_back(HpUp(Epos,hpitem));
 		}
 		isDrop = false;
 	}
@@ -24,10 +25,11 @@ void itemDropping::drop(sf::Vector2f Epos,float dt)
 
 void itemDropping::randomChance()
 {
-	tempNumber = rand() % 1000;
+	tempNumber = rand() % 10000;
 	if (tempNumber < (changePercentage * 100))
 	{
 		isDrop = true;
+		tempNumber = 0;
 	}
 }
 

@@ -10,7 +10,7 @@ Fire::~Fire()
 
 }
 
-void Fire::update(float dt, Player& player, sf::Texture& texture)
+void Fire::update(float dt, Player& player, sf::Texture& texture,sf::Texture& ultiTex)
 {
 	if (totalTime < cooldown)
 	{
@@ -20,7 +20,36 @@ void Fire::update(float dt, Player& player, sf::Texture& texture)
 	{
 		canshoot = true;
 	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) and canshoot == true)
+	if (player.abilityCount == 100)
+	{
+		isUltiReady = true;
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) and isUltiReady == true)
+	{
+		std::cout << "Fire ULT" << std::endl;
+		isUltiReady = false;
+		isUltiPlaying = true;
+		player.abilityCount = 0;
+		ultis.push_back(Ulti(player.getPos(),ultiTex));
+	}
+	if (isUltiPlaying == true)
+	{
+		ultiTimer += dt;
+		if (ultiTimer < ultiCooldown)
+		{
+			for (int i = 0; i < ultis.size(); i++)
+			{
+				ultis[i].update(dt,isUltiPlaying,player.getPos());
+			}
+		}
+		else
+		{
+			ultiTimer = 0;
+			isUltiPlaying = false;
+			ultis.clear();
+		}
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) and canshoot == true and isUltiPlaying == false)
 	{
 		totalTime = 0 ;
 		canshoot = false;
@@ -39,6 +68,7 @@ void Fire::update(float dt, Player& player, sf::Texture& texture)
 			bullets.erase(bullets.begin() + i);
 		}
 	}
+
 }
 
 void Fire::render(sf::RenderTarget& target)
@@ -46,5 +76,9 @@ void Fire::render(sf::RenderTarget& target)
 	for (int i = 0; i < bullets.size(); i++)
 	{
 		bullets[i].render(target);
+	}
+	for (int i = 0; i < ultis.size(); i++)
+	{
+		ultis[i].render(target);
 	}
 }

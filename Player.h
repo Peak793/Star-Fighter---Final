@@ -3,6 +3,7 @@
 #include "SFML/Window.hpp"
 #include "SFML/Audio.hpp"
 #include "SFML/System.hpp"
+#include <iostream>
 #define ROW 3
 #define Collum 8
 class Player
@@ -24,10 +25,13 @@ public:
 	bool isTurnLeft = false;
 	bool isTurnRight = false;
 	bool isDamaged = false;
+	bool canUlti = false;
 	float damgedTotalTime = 0;
 	float invincibleTime = 0.5;
-
-
+	float ishit = false;
+	float hittime = 0;
+	float hitCooldown = 1;
+	int abilityCount = 0;
 	sf::Vector2u currentImage;
 
 	//spec number

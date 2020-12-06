@@ -19,12 +19,15 @@ public:
 	//Score
 	sf::Text Score;
 
+	float totalTime = 0;
+	float switchTime = 0.1;
+
 public:
-	UI();
+	UI(sf::Vector2f playerPos);
 	~UI();
 
 
-	void			update(float dt, int hp, int hpmax, int score);
+	void			update(float dt, int hp, int hpmax, int score, sf::Vector2f playerPos,int& abilityCount);
 	void			render(sf::RenderTarget &target);
 };
 

@@ -57,6 +57,9 @@ private:
 			sf::Texture bTex;
 			Fire fire;
 
+		//ulti
+			sf::Texture ultiTex;
+
 		//Enemies
 			sf::Texture eTex;
 			SpawnEnemies spawnEne;
