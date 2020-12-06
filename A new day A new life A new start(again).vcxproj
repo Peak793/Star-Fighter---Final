@@ -32,6 +32,7 @@
     <ClCompile Include="Gamestart.cpp" />
     <ClCompile Include="How_to_play.cpp" />
     <ClCompile Include="HpUp.cpp" />
+    <ClCompile Include="itemDropping.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -53,6 +54,7 @@
     <ClInclude Include="Gamestart.h" />
     <ClInclude Include="How_to_play.h" />
     <ClInclude Include="HpUp.h" />
+    <ClInclude Include="itemDropping.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="SpawnEbullet.h" />

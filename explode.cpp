@@ -12,7 +12,7 @@ explode::explode(sf::Texture& texture, sf::Vector2f Pos)
 	exRect.top = currentImage.y * exRect.height;
 	explodeFx.setTexture(texture);
 	explodeFx.setTextureRect(exRect);
-	explodeFx.setOrigin(explodeFx.getGlobalBounds().width/2, explodeFx.getGlobalBounds().height);
+	explodeFx.setOrigin(explodeFx.getGlobalBounds().width/2, explodeFx.getGlobalBounds().height/2);
 	explodeFx.setPosition(Pos);
 
 }

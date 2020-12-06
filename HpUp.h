@@ -3,14 +3,13 @@
 class HpUp
 {
 public:
-	sf::RectangleShape hpitem;
-	
+	sf::Sprite hpitem;
+	sf::Texture texture;
 public:
-	HpUp(sf::Texture &texture);
+	HpUp(sf::Vector2f Ene3myPos);
 	~HpUp();
 
 	void					update(float dt);
 	void					render(sf::RenderTarget &target);
 	
 };
-

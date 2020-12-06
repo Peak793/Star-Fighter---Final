@@ -72,10 +72,13 @@
     <ClCompile Include="Player.cpp">
       <Filter>Source Files\Gamestate</Filter>
     </ClCompile>
-    <ClCompile Include="AddExplo.cpp">
+    <ClCompile Include="UI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="UI.cpp">
+    <ClCompile Include="AddExplo.cpp">
+      <Filter>Source Files\Gamestate</Filter>
+    </ClCompile>
+    <ClCompile Include="itemDropping.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -132,6 +135,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="UI.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="itemDropping.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

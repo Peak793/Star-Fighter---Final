@@ -130,6 +130,7 @@ void Game::updateGameState()
 		collisionupdate(gameLV);
 		ADEX.update(dt);
 		ui.update(dt,mPlayer.hp,mPlayer.hpMax,score);
+		drop.update(dt);
 	}
 }
 
@@ -155,6 +156,10 @@ void Game::renderGameState()
 
 		//Dead Animation
 		ADEX.render(window);
+
+		//item render
+		drop.render(window);
+
 		if(isGAMESTART == true)
 			ui.render(window);
 	}
@@ -183,8 +188,9 @@ void Game::updateGameLV()
 
 void Game::collisionupdate(float LV)
 {
-	collision.bulletAndenemies(fire,spawnEne,score,ADEX,eTex,LV);
+	collision.bulletAndenemies(fire,spawnEne,score,ADEX,eTex,LV,drop,dt);
 	collision.EbulletAndPlayer(mPlayer,SpawnEB);
+	collision.EnemiesAndPlayer(mPlayer,spawnEne,ADEX,eTex);
 }
 
 void Game::updateHowtoplayState()

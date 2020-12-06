@@ -17,6 +17,7 @@
 #include "SpawnEbullet.h"
 #include "AddExplo.h"
 #include "UI.h"
+#include "itemDropping.h"
 class Game
 {
 private:
@@ -75,7 +76,9 @@ private:
 
 		//Ui
 			UI ui;
-
+		
+		// item dropping
+			itemDropping drop;
 
 private:
 
