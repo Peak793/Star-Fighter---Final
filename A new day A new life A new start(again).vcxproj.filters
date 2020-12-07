@@ -48,9 +48,6 @@
     <ClCompile Include="Collision.cpp">
       <Filter>Source Files\Gamestate</Filter>
     </ClCompile>
-    <ClCompile Include="Enemy.cpp">
-      <Filter>Source Files\Gamestate</Filter>
-    </ClCompile>
     <ClCompile Include="Enemybullet.cpp">
       <Filter>Source Files\Gamestate</Filter>
     </ClCompile>
@@ -78,10 +75,19 @@
     <ClCompile Include="AddExplo.cpp">
       <Filter>Source Files\Gamestate</Filter>
     </ClCompile>
-    <ClCompile Include="itemDropping.cpp">
+    <ClCompile Include="Ulti.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Ulti.cpp">
+    <ClCompile Include="Sheild.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EnergyUP.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="itemDropping.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -108,9 +114,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Fire.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Enemy.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SpawnEnemies.h">
@@ -140,10 +143,19 @@
     <ClInclude Include="UI.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="itemDropping.h">
+    <ClInclude Include="Ulti.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Ulti.h">
+    <ClInclude Include="Sheild.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EnergyUP.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="itemDropping.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

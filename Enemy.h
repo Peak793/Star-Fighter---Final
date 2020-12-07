@@ -13,12 +13,12 @@ private:
 	float speed = 200;
 	float totalTime = 0;
 	float switchTime = 0.1;
-	
+
 	//ishit
-	int hitTemp=0;
+	int hitTemp = 0;
 
 	//shoot Ebullet
-	float shootTimer=0;
+	float shootTimer = 0;
 	float canshootTime = 0;
 
 public:
@@ -31,10 +31,10 @@ public:
 	int bulletcount = 0;
 
 public:
-	Enemy(sf::Texture &texture,sf::Vector2f spawnPos,float LV);
+	Enemy(sf::Texture& texture, sf::Vector2f spawnPos, float LV);
 	~Enemy();
 
-	void				update(float dt,float width, float LV);
+	void				update(float dt, float width, float LV);
 	void				render(sf::RenderTarget& target);
 	void				animation(float dt);
 	void				updateCanshoot(float dt);
@@ -42,4 +42,3 @@ public:
 	sf::Vector2f		getPos();
 	sf::FloatRect		getGlobalBounds();
 };
-

@@ -193,7 +193,7 @@ void Game::animationUpdate()
 
 void Game::updateGameLV()
 {
-	gameLV = score / 5000;
+	gameLV = score / 10000;
 }
 
 void Game::collisionupdate(float LV)

@@ -24,9 +24,9 @@ void Fire::update(float dt, Player& player, sf::Texture& texture,sf::Texture& ul
 	{
 		isUltiReady = true;
 	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) and isUltiReady == true)
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) and isUltiReady == true)
 	{
-		EB.Ebullets.clear();
+		/*EB.Ebullets.clear();*/
 		std::cout << "Fire ULT" << std::endl;
 		isUltiReady = false;
 		isUltiPlaying = true;

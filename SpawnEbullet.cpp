@@ -10,11 +10,7 @@ SpawnEbullet::~SpawnEbullet()
 
 void SpawnEbullet::update(float dt,SpawnEnemies &SE,sf::Texture &texture,float LV)
 {
-	updateTime = 2 - (LV/3);
-	if (updateTime < 0.8)
-	{
-		updateTime = 0.5;
-	}
+	updateTime = 1;
 	if (totalTime < updateTime)
 	{
 		totalTime += dt;

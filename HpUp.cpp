@@ -15,6 +15,11 @@ sf::FloatRect HpUp::getGlobalBounds()
 	return sf::FloatRect(hpitem.getGlobalBounds());
 }
 
+sf::Vector2f HpUp::getPos()
+{
+	return sf::Vector2f(hpitem.getPosition());
+}
+
 void HpUp::update(float dt)
 {
 	hpitem.move(0.f,dt * 200);

@@ -20,7 +20,7 @@ void Collision::bulletAndenemies(Fire& B, SpawnEnemies& E,int &score,AddExplo &A
 				B.bullets.erase(B.bullets.begin() + i);
 				if (E.enemies[k].hp <= 0)
 				{
-					player.abilityCount += 10;
+					player.abilityCount += 2;
 					if (player.abilityCount > 100)
 						player.abilityCount = 100;
 					ADEX.DeadAni(texture, E.enemies[k].getPos());
@@ -28,7 +28,7 @@ void Collision::bulletAndenemies(Fire& B, SpawnEnemies& E,int &score,AddExplo &A
 					drop.drop(E.enemies[k].getPos(),dt);
 					E.enemies.erase(E.enemies.begin()+k);
 					E.enemiesCount--;
-						score += 100+(LV*100);
+						score += 100;
 					break;
 				}
 				break;
@@ -42,11 +42,11 @@ void Collision::bulletAndenemies(Fire& B, SpawnEnemies& E,int &score,AddExplo &A
 			if (B.ultis[i].ulti.getGlobalBounds().intersects(E.enemies[j].getGlobalBounds()))
 			{
 				ADEX.DeadAni(texture, E.enemies[j].getPos());
-				drop.randomChance();
-				drop.drop(E.enemies[j].getPos(), dt);
+				//drop.randomChance();
+				//drop.drop(E.enemies[j].getPos(), dt);
 				E.enemies.erase(E.enemies.begin()+j);
 				E.enemiesCount--;
-				score += 100 + (LV * 100);
+				score += 100;
 				break;
 			}
 		}
@@ -98,8 +98,8 @@ void Collision::itemAndPlayer(Player& player, itemDropping& drop)
 		if (drop.item1[i].getGlobalBounds().intersects(player.getGlobalbounds()))
 		{
 			player.hp += drop.item1[i].plushp;
-			if (player.hp > 10)
-				player.hp = 10;
+			if (player.hp >3)
+				player.hp = 3;
 			drop.item1.erase(drop.item1.begin()+ i);
 			break;
 		}

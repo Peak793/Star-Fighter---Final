@@ -1,9 +1,9 @@
 #include "Enemy.h"
 
-Enemy::Enemy(sf::Texture &texture,sf::Vector2f spawnPos,float LV)
+Enemy::Enemy(sf::Texture& texture, sf::Vector2f spawnPos, float LV)
 {
-	hp = LV + 2;
-	damage = 1 + LV;
+	hp = 3;
+	damage = 1;
 	eSprite.setTexture(texture);
 	imageCount.x = 16;
 	imageCount.y = 3;
@@ -16,42 +16,38 @@ Enemy::Enemy(sf::Texture &texture,sf::Vector2f spawnPos,float LV)
 	eSprite.setTextureRect(eRect);
 	spawnPosition = spawnPos;
 	eSprite.setPosition(spawnPosition.x, -100);
-	bulletMax = 2 + LV;
-	bulletcount = bulletMax;
-	canshootTime = 3-LV;
+
+	canshootTime = 1;
 }
 
 Enemy::~Enemy()
 {
 }
 
-void Enemy::update(float dt,float width,float LV)
+void Enemy::update(float dt, float width, float LV)
 {
-	canshootTime = 3 - (LV);
-	if (canshootTime < 1)
-		canshootTime = 1;
 	updateCanshoot(dt);
 	if (eSprite.getPosition().y < spawnPosition.y)
 	{
-		eSprite.move(0,dt * 300);
+		eSprite.move(0, dt * 300);
 	}
 	else
 	{
 		if (dir == 0)
 		{
-			eSprite.move(-dt*speed,0);
+			eSprite.move(-dt * speed, 0);
 			if (eSprite.getPosition().x <= eSprite.getGlobalBounds().width / 2)
 			{
-				eSprite.setPosition(eSprite.getGlobalBounds().width / 2,eSprite.getPosition().y);
+				eSprite.setPosition(eSprite.getGlobalBounds().width / 2, eSprite.getPosition().y);
 				dir = !dir;
 			}
 		}
-		else if(dir == 1)
+		else if (dir == 1)
 		{
 			eSprite.move(dt * speed, 0);
-			if (eSprite.getPosition().x  >= width - eSprite.getGlobalBounds().width / 2)
+			if (eSprite.getPosition().x >= width - eSprite.getGlobalBounds().width / 2)
 			{
-				eSprite.setPosition(width- eSprite.getGlobalBounds().width/2, eSprite.getPosition().y);
+				eSprite.setPosition(width - eSprite.getGlobalBounds().width / 2, eSprite.getPosition().y);
 				dir = !dir;
 			}
 		}
@@ -72,9 +68,9 @@ void Enemy::animation(float dt)
 	}
 	if (totalTime >= switchTime)
 	{
-		 currentImage.y = 0;
+		currentImage.y = 0;
 		totalTime -= switchTime;
-		currentImage.x ++;
+		currentImage.x++;
 		if (currentImage.x >= imageCount.x)
 		{
 			currentImage.x = 0;

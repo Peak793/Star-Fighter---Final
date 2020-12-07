@@ -1,20 +1,16 @@
 #pragma once
 #include "SFML/Graphics.hpp"
-class HpUp
+class EnergyUP
 {
 public:
-	sf::Sprite hpitem;
-	sf::Texture texture;
-
-	int plushp = 1;
+	sf::Sprite sprite;
 public:
-	HpUp(sf::Vector2f Ene3myPos,sf::Texture &hpitemTexture);
-	~HpUp();
+	EnergyUP(sf::Texture& energyUpTex, sf::Vector2f ePos);
+	~EnergyUP();
 	sf::FloatRect getGlobalBounds();
 	sf::Vector2f getPos();
 
 	void					update(float dt);
 	void					render(sf::RenderTarget &target);
-	
-	
 };
+

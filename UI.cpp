@@ -52,7 +52,7 @@ void UI::update(float dt,int hp,int hpmax,int score,sf::Vector2f playerPos,int &
 	
 	if (hp > 0)
 	{
-		this->hp.setSize(sf::Vector2f((hp * 64) / 10, 6));
+		this->hp.setSize(sf::Vector2f((hp * 64) / 3, 6));
 	}
 	else
 	{
