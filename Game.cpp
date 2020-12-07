@@ -90,6 +90,11 @@ void Game::loadTexture()
 	{
 		//handle error
 	}
+	
+	if (!ultiRingTex.loadFromFile("img/PowerUPRing.png"))
+	{
+		//handle error
+	}
 }
 
 void Game::update()
@@ -129,13 +134,13 @@ void Game::updateGameState()
 
 	if (state == 1 and isGAMESTART == true)
 	{
-		fire.update(dt,mPlayer,bTex,ultiTex,SpawnEB);
+		fire.update(dt,mPlayer,bTex,ultiTex,SpawnEB,ultiRingTex);
 		spawnEne.update(dt,600,eTex,gameLV);
 		SpawnEB.update(dt,spawnEne,ebulletTex,gameLV);
 		collisionupdate(gameLV);
 		ADEX.update(dt);
 		ui.update(dt,mPlayer.hp,mPlayer.hpMax,score,mPlayer.getPos(),mPlayer.abilityCount);
-		drop.update(dt);
+		drop.update(dt);	
 	}
 }
 

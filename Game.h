@@ -59,6 +59,7 @@ private:
 
 		//ulti
 			sf::Texture ultiTex;
+			sf::Texture ultiRingTex;
 
 		//Enemies
 			sf::Texture eTex;

@@ -10,7 +10,7 @@ Fire::~Fire()
 
 }
 
-void Fire::update(float dt, Player& player, sf::Texture& texture,sf::Texture& ultiTex, SpawnEbullet& EB)
+void Fire::update(float dt, Player& player, sf::Texture& texture,sf::Texture& ultiTex, SpawnEbullet& EB,sf::Texture &ultiRingTex)
 {
 	if (totalTime < cooldown)
 	{
@@ -31,7 +31,7 @@ void Fire::update(float dt, Player& player, sf::Texture& texture,sf::Texture& ul
 		isUltiReady = false;
 		isUltiPlaying = true;
 		player.abilityCount = 0;
-		ultis.push_back(Ulti(player.getPos(),ultiTex));
+		ultis.push_back(Ulti(player.getPos(),ultiTex,ultiRingTex));
 	}
 	if (isUltiPlaying == true)
 	{
