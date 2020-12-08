@@ -84,6 +84,9 @@ private:
 		// item dropping
 			itemDropping drop;
 
+		//Shield
+			sf::Texture shieldRingTex;
+
 private:
 
 public:
@@ -114,9 +117,9 @@ public:
 	void		animationUpdate();
 	void		updateGameLV();
 	void		collisionupdate(float gameLV);
+	int			reset();
 
 	//How to play
 	void		updateHowtoplayState();
 	void		renderHowtoplayState();
 };
-

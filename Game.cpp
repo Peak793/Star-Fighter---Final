@@ -95,6 +95,10 @@ void Game::loadTexture()
 	{
 		//handle error
 	}
+	if (!shieldRingTex.loadFromFile("img/sheildRing.png"))
+	{
+		//handle error
+	}
 }
 
 void Game::update()
@@ -125,53 +129,61 @@ void Game::changeState()
 void Game::updateGameState()
 {
 	updateGameLV();
-	if (state == 1 )
-	{
-		mPlayer.update(dt, window.getSize().x, window.getSize().y,isGAMESTART);
-		background.update(mPlayer.movementspeed,dt);
-		animationUpdate();
-	}
+		if (state == 1)
+		{
+			mPlayer.update(dt, window.getSize().x, window.getSize().y, isGAMESTART);
+			background.update(mPlayer.movementspeed, dt);
+			animationUpdate();
+		}
 
-	if (state == 1 and isGAMESTART == true)
-	{
-		fire.update(dt,mPlayer,bTex,ultiTex,SpawnEB,ultiRingTex);
-		spawnEne.update(dt,600,eTex,gameLV);
-		SpawnEB.update(dt,spawnEne,ebulletTex,gameLV);
-		collisionupdate(gameLV);
-		ADEX.update(dt);
-		ui.update(dt,mPlayer.hp,mPlayer.hpMax,score,mPlayer.getPos(),mPlayer.abilityCount);
-		drop.update(dt);	
-	}
+		if (state == 1 and isGAMESTART == true)
+		{
+
+			fire.update(dt, mPlayer, bTex, ultiTex, SpawnEB, ultiRingTex);
+			spawnEne.update(dt, 600, eTex, gameLV);
+			SpawnEB.update(dt, spawnEne, ebulletTex, gameLV);
+			collisionupdate(gameLV);
+			ADEX.update(dt);
+			ui.update(dt, mPlayer.hp, mPlayer.hpMax, score, mPlayer.getPos(), mPlayer.abilityCount);
+			drop.update(dt);
+		}
 }
 
 void Game::renderGameState()
-{
-	if (state == 1)
+{ 
+	if (state == 1 and mPlayer.hp > 0)
 	{
-		background.render(window);
+		if (state == 1)
+		{
+			background.render(window);
 
-		//gsText
-		gsText.render(window);
-		
-		//Fire
-		fire.render(window);
+			//gsText
+			gsText.render(window);
 
-		//Player
-		mPlayer.render(window);
+			//Fire
+			fire.render(window);
 
-		spawnEne.render(window);
-		
-		//Ebullet
-		SpawnEB.render(window);
+			//Player
+			mPlayer.render(window);
 
-		//Dead Animation
-		ADEX.render(window);
+			spawnEne.render(window);
 
-		//item render
-		drop.render(window);
+			//Ebullet
+			SpawnEB.render(window);
 
-		if(isGAMESTART == true)
-			ui.render(window);
+			//Dead Animation
+			ADEX.render(window);
+
+			//item render
+			drop.render(window);
+
+			if (isGAMESTART == true)
+				ui.render(window);
+		}
+	}
+	else
+	{
+
 	}
 }
 
@@ -187,7 +199,7 @@ void Game::animationUpdate()
 		}
 		
 		//Player
-		mPlayer.animation(dt);
+		mPlayer.animation(dt,shieldRingTex);
 	}
 }
 
@@ -199,10 +211,18 @@ void Game::updateGameLV()
 void Game::collisionupdate(float LV)
 {
 	collision.bulletAndenemies(fire,spawnEne,score,ADEX,eTex,LV,drop,dt,mPlayer);
-	collision.EbulletAndPlayer(mPlayer,SpawnEB); 
+	collision.EbulletAndPlayer(mPlayer,SpawnEB,state); 
 	collision.EnemiesAndPlayer(mPlayer,spawnEne,ADEX,eTex);
 	collision.itemAndPlayer(mPlayer,drop);
 	collision.ultiAndEbullet(fire,SpawnEB);
+}
+
+int Game::reset()
+{
+	gameLV = 0;
+	score = 0;
+
+	return 1;
 }
 
 void Game::updateHowtoplayState()

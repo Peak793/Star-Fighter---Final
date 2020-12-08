@@ -49,4 +49,3 @@ public:
 	void	updateLogo();
 	void	pressMenu(float &state, sf::RenderWindow& window,float dt);
 };
-

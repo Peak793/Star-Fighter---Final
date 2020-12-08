@@ -15,4 +15,3 @@ public:
 	void					update();
 	void					render(sf::RenderWindow &target);
 };
-

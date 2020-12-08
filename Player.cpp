@@ -16,6 +16,7 @@ Player::Player(float width,float height)
 	player.setPosition(width/2, height/8 * 7);
 	initHitbox();
 	hitbox.setPosition(player.getPosition());
+	//hitbox.setPosition(sf::vector2f(player.getPosition().x,player.getPosition().y+-ครึ่งนึง));
 }
 
 Player::~Player()
@@ -33,10 +34,12 @@ void Player::loadTex()
 void Player::initHitbox()
 {
 	hitbox.setRadius(10.f);
+	//hitbox.setSize(sf::Vector2f(x,y)); 
 	hitbox.setFillColor(sf::Color::Transparent);
-	hitbox.setOutlineColor(sf::Color::Red);
+	hitbox.setOutlineColor(sf::Color::Transparent);
 	hitbox.setOutlineThickness(1.f);
 	hitbox.setOrigin(hitbox.getRadius(),hitbox.getRadius());
+	//hitbox.setPrigin(hitbox.getGlobalBounds().width/2,hitbox.getGlobalBounds().height/2);
 }
 
 void Player::update(float dt,float winwidth,float winheight, bool isGAMESTART)
@@ -90,6 +93,31 @@ void Player::move(float dt, float winwidth, float winheight,bool isGAMESTART)
 		if (player.getPosition().y > winheight - (pRect.height / 2))
 			player.setPosition(player.getPosition().x, winheight - (pRect.height / 2));
 		hitbox.setPosition(player.getPosition());
+		//hitbox.setPosition(sf::vector2f(player.getPosition().x,player.getPosition().y+-ครึ่งนึง));
+	}
+}
+
+void Player::shieldOn(float dt, sf::Texture &sheildRingTex)
+{
+	if (hitShield == true and isSheildOn == false)
+	{
+		Sheild.push_back(SheildRing(sheildRingTex,player.getPosition()));
+		hitShield = false;
+		isSheildOn = true;
+	}
+	if (isSheildOn == true)
+	{
+		shieldTimer += dt;
+		if (shieldTimer >= shieldCooldown)
+		{
+			shieldTimer = 0;
+			isSheildOn = false;
+			Sheild.clear();
+		}
+		for (int i = 0; i < Sheild.size(); i++)
+		{
+			Sheild[i].update(dt,player.getPosition());
+		}
 	}
 }
 
@@ -106,10 +134,15 @@ sf::Vector2f Player::getPos()
 void Player::render(sf::RenderTarget& target)
 {
 	target.draw(player);
+	for (int i = 0; i < Sheild.size(); i++)
+	{
+		Sheild[i].render(target);
+	}
 	target.draw(hitbox);
+
 }
 
-void Player::animation(float dt)
+void Player::animation(float dt,sf::Texture &sheildRingTex)
 {
 	totalTime += dt;
 	if (isDamaged == true)
@@ -140,6 +173,7 @@ void Player::animation(float dt)
 	}
 	pRect.left = currentImage.x * pRect.width;
 	pRect.top = currentImage.y * pRect.height;
-
 	player.setTextureRect(pRect);
+
+	shieldOn(dt,sheildRingTex);
 }

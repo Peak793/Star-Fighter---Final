@@ -4,6 +4,7 @@
 #include "SFML/Audio.hpp"
 #include "SFML/System.hpp"
 #include <iostream>
+#include "SheildRing.h"
 #define ROW 3
 #define Collum 8
 class Player
@@ -26,6 +27,10 @@ public:
 	bool isTurnRight = false;
 	bool isDamaged = false;
 	bool canUlti = false;
+	bool hitShield = false;
+	bool isSheildOn = false;
+	float shieldTimer = 0;
+	float shieldCooldown = 5;
 	float damgedTotalTime = 0;
 	float invincibleTime = 0.5;
 	float ishit = false;
@@ -34,6 +39,7 @@ public:
 	int abilityCount = 0;
 	sf::Vector2u currentImage;
 
+	std::vector <SheildRing>Sheild;
 	//spec number
 	float movementspeed = 350;
 	int shootCooldown = 500;
@@ -46,10 +52,9 @@ public:
 	void					initHitbox();
 	void					update(float dt, float winwidth, float winheight, bool isGAMESTART);
 	void					render(sf::RenderTarget& target);
-	void					animation(float dt);
+	void					animation(float dt,sf::Texture &sheildRingTex);
 	void					move(float dt,float winwidth,float winheight, bool isGAMESTART);
+	void					shieldOn(float dt, sf::Texture &sheildRingTex);
 	sf::FloatRect			getGlobalbounds();
 	sf::Vector2f			getPos();
-
 };
-

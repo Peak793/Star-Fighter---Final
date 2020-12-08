@@ -33,7 +33,7 @@ UI::UI(sf::Vector2f playerPos)
 	hpback.setPosition(playerPos.x-32, playerPos.y + 32);
 
 	hp.setSize(sf::Vector2f(64.f, 6.f));
-	hp.setFillColor(sf::Color::Red);
+	hp.setFillColor(sf::Color::Green);
 	hp.setPosition(playerPos.x-32, playerPos.y + 32);
 
 	hpText.setOrigin(hpText.getGlobalBounds().width/2,hpText.getGlobalBounds().height/2);

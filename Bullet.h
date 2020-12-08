@@ -18,5 +18,3 @@ public:
 	sf::Vector2f	getPos();
 	sf::FloatRect	getGlobalBounds();
 };
-
-

@@ -53,17 +53,32 @@ void Collision::bulletAndenemies(Fire& B, SpawnEnemies& E,int &score,AddExplo &A
 	}
 }
 
-void Collision::EbulletAndPlayer(Player& player, SpawnEbullet& EB)
+void Collision::EbulletAndPlayer(Player& player, SpawnEbullet& EB,float state)
 {
+	if(player.isSheildOn == false)
 	for (int i = 0; i < EB.Ebullets.size(); i++)
 	{
 		if (EB.Ebullets[i].getGlobalBounds().intersects(player.getGlobalbounds()) and player.isDamaged == false)
 		{
 			player.isDamaged = true;
-			if (player.hp > 0)
-				player.hp -= EB.Ebullets[i].damage;
+			player.hp -= EB.Ebullets[i].damage;
+			if (player.hp == 0)
+			{
+				state = 3;
+			}
 			EB.Ebullets.erase(EB.Ebullets.begin()+i);
 			break;
+		}
+	}
+	else
+	for (int i = 0; i < player.Sheild.size(); i++)
+	{
+		for (int j = 0; j < EB.Ebullets.size(); j++)
+		{
+			if (player.Sheild[i].getGlobalBounds().intersects(EB.Ebullets[j].getGlobalBounds()))
+			{
+				EB.Ebullets.erase(EB.Ebullets.begin() + j);
+			}
 		}
 	}
 	if (player.hp < 0)
@@ -93,6 +108,7 @@ void Collision::EnemiesAndPlayer(Player& player, SpawnEnemies& E,AddExplo &ADEX,
 
 void Collision::itemAndPlayer(Player& player, itemDropping& drop)
 {
+	//hp up
 	for (int i = 0; i < drop.item1.size(); i++)
 	{
 		if (drop.item1[i].getGlobalBounds().intersects(player.getGlobalbounds()))
@@ -102,6 +118,35 @@ void Collision::itemAndPlayer(Player& player, itemDropping& drop)
 				player.hp = 3;
 			drop.item1.erase(drop.item1.begin()+ i);
 			break;
+		}
+	}
+
+	//Sheild
+	for (int i = 0; i < drop.item2.size(); i++)
+	{
+		if (drop.item2[i].getGlobalBounds().intersects(player.getGlobalbounds()))
+		{
+			if (player.hitShield == false and player.isSheildOn == false)
+			{
+				player.hitShield = true;
+			}
+			drop.item2.erase(drop.item2.begin() + i);
+			break;
+		}
+	}
+
+	//Energy up
+	for (int i = 0; i < drop.item3.size(); i++)
+	{
+		if (drop.item3[i].getGlobalBounds().intersects(player.getGlobalbounds()))
+		{
+			player.abilityCount += 100;
+			if (player.abilityCount > 100)
+			{
+				player.abilityCount = 100;
+			}
+			drop.item3.erase(drop.item3.begin() + i);
+			break; 
 		}
 	}
 }
@@ -120,5 +165,3 @@ void Collision::ultiAndEbullet(Fire& bullet, SpawnEbullet& EB)
 		}
 	}
 }
-
-

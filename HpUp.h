@@ -15,6 +15,4 @@ public:
 
 	void					update(float dt);
 	void					render(sf::RenderTarget &target);
-	
-	
 };

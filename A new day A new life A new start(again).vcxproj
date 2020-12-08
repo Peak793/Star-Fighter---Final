@@ -38,6 +38,7 @@
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Sheild.cpp" />
+    <ClCompile Include="SheildRing.cpp" />
     <ClCompile Include="SpawnEbullet.cpp" />
     <ClCompile Include="SpawnEnemies.cpp" />
     <ClCompile Include="UI.cpp" />
@@ -62,6 +63,7 @@
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Sheild.h" />
+    <ClInclude Include="SheildRing.h" />
     <ClInclude Include="SpawnEbullet.h" />
     <ClInclude Include="SpawnEnemies.h" />
     <ClInclude Include="UI.h" />

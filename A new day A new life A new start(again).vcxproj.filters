@@ -19,12 +19,21 @@
     <Filter Include="Source Files\Gamestate">
       <UniqueIdentifier>{a7a477cc-207b-44cd-8239-11ee1b01a037}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Gamestate\item">
+      <UniqueIdentifier>{686411d7-63cb-43a5-9bdf-4ca57776ef06}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Gamestate\player">
+      <UniqueIdentifier>{e6627afd-fcff-4166-a1fa-365d597c8605}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Gamestate\Enemy">
+      <UniqueIdentifier>{086eeb62-8706-4dd7-8d7c-f96145139138}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Gamestate\game system">
+      <UniqueIdentifier>{21fba0d0-75db-4602-835f-7c76cf2430a3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="HpUp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Menu.cpp">
@@ -33,61 +42,67 @@
     <ClCompile Include="Game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GamePause.cpp">
-      <Filter>Source Files\Gamestate</Filter>
-    </ClCompile>
-    <ClCompile Include="Gamestart.cpp">
-      <Filter>Source Files\Gamestate</Filter>
-    </ClCompile>
-    <ClCompile Include="Background.cpp">
-      <Filter>Source Files\Gamestate</Filter>
-    </ClCompile>
-    <ClCompile Include="Bullet.cpp">
-      <Filter>Source Files\Gamestate</Filter>
-    </ClCompile>
-    <ClCompile Include="Collision.cpp">
-      <Filter>Source Files\Gamestate</Filter>
-    </ClCompile>
-    <ClCompile Include="Enemybullet.cpp">
-      <Filter>Source Files\Gamestate</Filter>
-    </ClCompile>
-    <ClCompile Include="explode.cpp">
-      <Filter>Source Files\Gamestate</Filter>
-    </ClCompile>
-    <ClCompile Include="Fire.cpp">
-      <Filter>Source Files\Gamestate</Filter>
-    </ClCompile>
     <ClCompile Include="How_to_play.cpp">
       <Filter>Source Files\Menustate</Filter>
-    </ClCompile>
-    <ClCompile Include="SpawnEnemies.cpp">
-      <Filter>Source Files\Gamestate</Filter>
-    </ClCompile>
-    <ClCompile Include="SpawnEbullet.cpp">
-      <Filter>Source Files\Gamestate</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Source Files\Gamestate</Filter>
     </ClCompile>
     <ClCompile Include="UI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AddExplo.cpp">
-      <Filter>Source Files\Gamestate</Filter>
-    </ClCompile>
     <ClCompile Include="Ulti.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Sheild.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="EnergyUP.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Gamestate\item</Filter>
     </ClCompile>
-    <ClCompile Include="Enemy.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="HpUp.cpp">
+      <Filter>Source Files\Gamestate\item</Filter>
     </ClCompile>
     <ClCompile Include="itemDropping.cpp">
+      <Filter>Source Files\Gamestate\item</Filter>
+    </ClCompile>
+    <ClCompile Include="Sheild.cpp">
+      <Filter>Source Files\Gamestate\item</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Source Files\Gamestate\player</Filter>
+    </ClCompile>
+    <ClCompile Include="Fire.cpp">
+      <Filter>Source Files\Gamestate\player</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Source Files\Gamestate\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemybullet.cpp">
+      <Filter>Source Files\Gamestate\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>Source Files\Gamestate\player</Filter>
+    </ClCompile>
+    <ClCompile Include="AddExplo.cpp">
+      <Filter>Source Files\Gamestate\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="SpawnEbullet.cpp">
+      <Filter>Source Files\Gamestate\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="SpawnEnemies.cpp">
+      <Filter>Source Files\Gamestate\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Gamestart.cpp">
+      <Filter>Source Files\Gamestate\game system</Filter>
+    </ClCompile>
+    <ClCompile Include="GamePause.cpp">
+      <Filter>Source Files\Gamestate\game system</Filter>
+    </ClCompile>
+    <ClCompile Include="explode.cpp">
+      <Filter>Source Files\Gamestate\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Background.cpp">
+      <Filter>Source Files\Gamestate\game system</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision.cpp">
+      <Filter>Source Files\Gamestate\game system</Filter>
+    </ClCompile>
+    <ClCompile Include="SheildRing.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -156,6 +171,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="itemDropping.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SheildRing.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

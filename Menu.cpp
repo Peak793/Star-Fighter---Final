@@ -192,5 +192,3 @@ void Menu::pressMenu(float &state,sf::RenderWindow &window,float dt)
 		}
 	}
 }
-
-

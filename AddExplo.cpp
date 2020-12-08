@@ -33,5 +33,3 @@ void AddExplo::render(sf::RenderTarget& target)
 		EXplo[i].render(target);
 	}
 }
-
-

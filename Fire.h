@@ -24,4 +24,3 @@ public:
 	void update(float dt,Player &player,sf::Texture &bullTex,sf::Texture &ultiTex,SpawnEbullet &EB, sf::Texture &ultiRingTex);
 	void render(sf::RenderTarget &target);
 };
-

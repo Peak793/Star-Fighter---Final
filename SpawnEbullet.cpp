@@ -26,10 +26,13 @@ void SpawnEbullet::update(float dt,SpawnEnemies &SE,sf::Texture &texture,float L
 			}
 		}
 	}
-
 	for (int i = 0; i < Ebullets.size(); i++)
 	{
 		Ebullets[i].update(dt);
+		if (Ebullets[i].getPos().y > 920)
+		{
+			Ebullets.erase(Ebullets.begin()+i);
+		}
 	}
 }
 

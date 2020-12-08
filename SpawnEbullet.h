@@ -16,4 +16,3 @@ public:
 	void				update(float dt,SpawnEnemies &SE,sf::Texture &texture,float LV);
 	void				render(sf::RenderTarget& target);
 };
-

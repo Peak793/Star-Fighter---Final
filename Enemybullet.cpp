@@ -25,6 +25,7 @@ Enemybullet::Enemybullet(sf::Texture &texture,sf::Vector2f enemyPos,int LV,int E
 
 Enemybullet::~Enemybullet()
 {
+
 }
 
 void Enemybullet::update(float dt)

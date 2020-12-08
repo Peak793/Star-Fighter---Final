@@ -21,4 +21,3 @@ public:
 	void						update(float dt, bool& isUltiPlaying, sf::Vector2f playerPos);
 	void						render(sf::RenderTarget &target);
 };
-
