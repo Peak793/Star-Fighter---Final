@@ -12,16 +12,25 @@ itemDropping::~itemDropping()
 {
 }
 
+void itemDropping::reset()
+{
+	bool isDrop = false;
+	int tempNumber = 0;
+	item1.clear();
+	item2.clear();
+	item3.clear();
+}
+
 void itemDropping::drop(sf::Vector2f Epos, float dt)
 {
 	if (isDrop)
 	{
 		int temp = rand() % 10000;
-		if (temp < 3000)
+		if (temp < 5000)
 		{
 			item1.push_back(HpUp(Epos, hpitem));
 		}
-		else if (temp >= 3000 and temp < 8000)
+		else if (temp >= 5000 and temp < 8000)
 		{
 			item2.push_back(Sheild(sheildTex, Epos));
 		}

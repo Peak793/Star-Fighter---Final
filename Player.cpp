@@ -23,6 +23,31 @@ Player::~Player()
 {
 }
 
+void Player::reset()
+{
+	int hpMax = 3;
+	int hp = 3;
+	bool isTurnLeft = false;
+	bool isTurnRight = false;
+	bool isDamaged = false;
+	bool canUlti = false;
+	bool hitShield = false;
+	bool isSheildOn = false;
+	float shieldTimer = 0;
+	float damgedTotalTime = 0;
+	float ishit = false;
+	float hittime = 0;
+	int abilityCount = 0;
+	float totalTime = 0;
+	currentImage.x = 0;
+	currentImage.y = 0;
+	pRect.left = currentImage.x * pRect.width;
+	pRect.top = currentImage.y * pRect.height;
+	player.setTextureRect(pRect);
+	player.setPosition(600 / 2, 900 / 8 * 7);
+	Sheild.clear();
+}
+
 void Player::loadTex()
 {
 	if(!pTex.loadFromFile("img/PlayerV2.png"));

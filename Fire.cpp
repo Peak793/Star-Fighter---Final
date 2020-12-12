@@ -10,6 +10,17 @@ Fire::~Fire()
 
 }
 
+void Fire::reset()
+{
+	bool canshoot = true;
+	float totalTime = 0;
+	bool isUltiReady = false;
+	bool isUltiPlaying = false;
+	float ultiTimer = 0;
+	bullets.clear();
+	ultis.clear();
+}
+
 void Fire::update(float dt, Player& player, sf::Texture& texture,sf::Texture& ultiTex, SpawnEbullet& EB,sf::Texture &ultiRingTex)
 {
 	if (totalTime < cooldown)

@@ -3,7 +3,7 @@
 HpUp::HpUp(sf::Vector2f EnemyPos,sf::Texture& hpitemTexture)
 {
 	hpitem.setTexture(hpitemTexture);
-	hpitem.setScale(1.5, 1.5);
+	hpitem.setScale(1, 1);
 	hpitem.setPosition(EnemyPos);
 }
 

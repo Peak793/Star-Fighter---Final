@@ -8,6 +8,12 @@ SpawnEbullet::~SpawnEbullet()
 {
 }
 
+void SpawnEbullet::reset()
+{
+	float totalTime = 0;
+	Ebullets.clear();
+}
+
 void SpawnEbullet::update(float dt,SpawnEnemies &SE,sf::Texture &texture,float LV)
 {
 	updateTime = 1;

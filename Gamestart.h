@@ -17,7 +17,8 @@ public:
 public:
 	Gamestart(float Winwidth,float Winheight);
 	~Gamestart();
-	 
+
+
 	void			update(float dt);
 	void			render(sf::RenderTarget &target);
 

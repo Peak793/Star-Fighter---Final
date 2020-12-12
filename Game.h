@@ -18,6 +18,7 @@
 #include "AddExplo.h"
 #include "UI.h"
 #include "itemDropping.h"
+#include "GamePause.h"
 class Game
 {
 private:
@@ -87,6 +88,8 @@ private:
 		//Shield
 			sf::Texture shieldRingTex;
 
+		//Pause menu
+			GamePause pause;
 private:
 
 public:
@@ -95,6 +98,7 @@ public:
 public:
 	Game(int Width, int Height);
 	~Game();
+	void		restart();
 
 	void		run();
 	void		updateDt();
@@ -117,7 +121,14 @@ public:
 	void		animationUpdate();
 	void		updateGameLV();
 	void		collisionupdate(float gameLV);
-	int			reset();
+
+	//Pause state
+	void		updateGamePauseState();
+	void		renderGamePauseState();
+
+	//Dead state
+	void		updateDeadState();
+	void		renderDeadState();
 
 	//How to play
 	void		updateHowtoplayState();

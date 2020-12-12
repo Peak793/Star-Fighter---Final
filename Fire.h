@@ -20,7 +20,9 @@ public:
 public:
 	Fire();
 	~Fire();
+	void		reset();
 
-	void update(float dt,Player &player,sf::Texture &bullTex,sf::Texture &ultiTex,SpawnEbullet &EB, sf::Texture &ultiRingTex);
-	void render(sf::RenderTarget &target);
+
+	void		update(float dt,Player &player,sf::Texture &bullTex,sf::Texture &ultiTex,SpawnEbullet &EB, sf::Texture &ultiRingTex);
+	void		render(sf::RenderTarget &target);
 };

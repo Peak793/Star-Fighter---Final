@@ -87,20 +87,39 @@ void Collision::EbulletAndPlayer(Player& player, SpawnEbullet& EB,float state)
 
 void Collision::EnemiesAndPlayer(Player& player, SpawnEnemies& E,AddExplo &ADEX,sf::Texture &texture)
 {
-	for(int i=0 ;i < E.enemies.size();i++)
+	if (player.isSheildOn == false)
 	{
-		if (player.getGlobalbounds().intersects(E.enemies[i].getGlobalBounds()) && player.isDamaged== false)
+		for (int i = 0; i < E.enemies.size(); i++)
 		{
-			E.enemies[i].hp = 0;
-			if(player.hp >0)
-			player.hp -= E.enemies[i].damage;
-			if (E.enemies[i].hp <= 0)
+			if (player.getGlobalbounds().intersects(E.enemies[i].getGlobalBounds()) && player.isDamaged == false)
 			{
-				ADEX.DeadAni(texture, E.enemies[i].getPos());
-				E.enemies.erase(E.enemies.begin() + i);
-				player.isDamaged = true;
-				E.enemiesCount--;
-				break;
+				E.enemies[i].hp = 0;
+				if (player.hp > 0)
+					player.hp -= E.enemies[i].damage;
+				if (E.enemies[i].hp <= 0)
+				{
+					ADEX.DeadAni(texture, E.enemies[i].getPos());
+					E.enemies.erase(E.enemies.begin() + i);
+					player.isDamaged = true;
+					E.enemiesCount--;
+					break;
+				}
+			}
+		}
+	}
+	else
+	{
+		for (int i = 0; i < player.Sheild.size(); i++)
+		{
+			for (int j = 0; j < E.enemies.size(); j++)
+			{
+				if (E.enemies[j].getGlobalBounds().intersects(player.Sheild[i].getGlobalBounds()))
+				{
+					ADEX.DeadAni(texture, E.enemies[i].getPos());
+					E.enemies.erase(E.enemies.begin()+j);
+					E.enemiesCount--;
+					break;
+				}
 			}
 		}
 	}

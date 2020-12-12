@@ -28,6 +28,8 @@ public:
 public:
 	itemDropping();
 	~itemDropping();
+	void				reset();
+
 	void				drop(sf::Vector2f Epos, float dt);
 	void				randomChance();
 	void				update(float dt);

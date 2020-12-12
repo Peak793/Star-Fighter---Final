@@ -2,16 +2,17 @@
 #include "SFML/Graphics.hpp"
 class GamePause
 {
-private:
+public:
 	sf::Sprite pauseWin;
 	sf::Texture texture;
-	
-public:
-
+	sf::Vector2f currentImage;
+	sf::Vector2f imageCount;
+	sf::IntRect rect;
 public:
 	GamePause();
 	~GamePause();
 	
-	void					update();
-	void					render(sf::RenderWindow &target);
+	void					update(float &state);
+	void					render(sf::RenderTarget &target);
+	void					loadTex();
 };

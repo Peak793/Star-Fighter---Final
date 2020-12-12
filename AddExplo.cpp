@@ -8,6 +8,11 @@ AddExplo::~AddExplo()
 {
 }
 
+void AddExplo::reset()
+{
+	EXplo.clear();
+}
+
 void AddExplo::DeadAni(sf::Texture& texture, sf::Vector2f pos)
 {
 	EXplo.push_back(explode(texture,pos));

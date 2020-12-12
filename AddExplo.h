@@ -8,6 +8,8 @@ public:
 public:
 	AddExplo();
 	~AddExplo();
+	void			reset();
+
 	void			DeadAni(sf::Texture& texture, sf::Vector2f pos);
 	void			update(float dt);
 	void			render(sf::RenderTarget &target);

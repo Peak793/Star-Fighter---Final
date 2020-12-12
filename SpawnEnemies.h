@@ -15,6 +15,8 @@ public:
 public:
 	SpawnEnemies();
 	~SpawnEnemies();
+	void			reset();
+
 	void			update(float dt,float width, sf::Texture& texture,float gameLV);
 	void			render(sf::RenderTarget &target);
 };

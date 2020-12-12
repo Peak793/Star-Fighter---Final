@@ -3,7 +3,7 @@
 EnergyUP::EnergyUP(sf::Texture& energyUpTex, sf::Vector2f ePos)
 {
 	sprite.setTexture(energyUpTex);
-	sprite.setScale(1.5,1.5);
+	sprite.setScale(1,1);
 	sprite.setOrigin(sprite.getGlobalBounds().width / 2, sprite.getGlobalBounds().height / 2);
 	sprite.setPosition(ePos);
 }

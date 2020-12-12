@@ -7,7 +7,7 @@ How_to_play::How_to_play(float Winwidth,float Winheight)
 		//handle error
 	}
 	howtoplay.setTexture(htpTex);
-	imageCount.x = 2;
+	imageCount.x = 1;
 	imageCount.y = 1;
 	currentImage.x = 0;
 	currentImage.y = 0;

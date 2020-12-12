@@ -12,6 +12,7 @@ public:
 public:
 	SpawnEbullet();
 	~SpawnEbullet();
+	void				reset();
 
 	void				update(float dt,SpawnEnemies &SE,sf::Texture &texture,float LV);
 	void				render(sf::RenderTarget& target);

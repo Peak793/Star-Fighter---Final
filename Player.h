@@ -22,7 +22,7 @@ private:
 public:
 	//Variables
 	int hpMax = 3;
-	int hp = 0;
+	int hp = 3;
 	bool isTurnLeft = false;
 	bool isTurnRight = false;
 	bool isDamaged = false;
@@ -47,6 +47,8 @@ public:
 public:
 	Player(float width,float height);
 	~Player();
+	void					reset();
+
 
 	void					loadTex();
 	void					initHitbox();

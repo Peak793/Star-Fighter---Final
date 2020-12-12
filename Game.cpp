@@ -18,6 +18,21 @@ Game::~Game()
 
 }
 
+void Game::restart()
+{
+	score = 0;
+	gameLV = 0;
+	isGAMESTART = false;
+	gsText.isGameStart = false;
+	spawnEne.reset();
+	SpawnEB.reset();
+	mPlayer.reset();
+	drop.reset();
+	ADEX.reset();
+	fire.reset();
+}
+
+
 void Game::run() //Run The game
 {
 	while (window.isOpen())
@@ -58,9 +73,40 @@ void Game::pollEvent()
 		if (event.type == sf::Event::Closed)
 			window.close();
 
-		if (event.type == sf::Event::KeyPressed and event.key.code == sf::Keyboard::Escape)
+		if (event.type == sf::Event::KeyPressed and event.key.code == sf::Keyboard::Escape && state ==0)
 			window.close();
+		if (event.type == sf::Event::KeyPressed and event.key.code == sf::Keyboard::Escape && state == 1)
+			state = 2;
 
+		if (event.type == sf::Event::KeyPressed and event.key.code == sf::Keyboard::W && state == 2)
+		{
+			pause.currentImage.x--;
+			if (pause.currentImage.x < 0)
+				pause.currentImage.x = 0;
+		}
+		if (event.type == sf::Event::KeyPressed and event.key.code == sf::Keyboard::S && state ==2)
+		{
+			pause.currentImage.x++;
+			if (pause.currentImage.x > 2)
+				pause.currentImage.x = 2;
+		}
+		if (event.type == sf::Event::KeyPressed and event.key.code == sf::Keyboard::Space && state == 2)
+		{
+			if (pause.currentImage.x == 0)
+			{
+				state = 1;
+			}
+			if (pause.currentImage.x == 1)
+			{
+				state = 0;
+				pause.currentImage.x = 0;
+				restart();
+			}
+			if (pause.currentImage.x == 2)
+			{
+				window.close();
+			}
+		}
 	}
 }
 
@@ -106,6 +152,7 @@ void Game::update()
 	updateMenuState();
 	updateGameState();
 	updateHowtoplayState();
+	updateGamePauseState();
 }
 
 void Game::render()
@@ -113,6 +160,7 @@ void Game::render()
 	renderMenuState();
 	renderGameState();
 	renderHowtoplayState();
+	renderGamePauseState();
 }
 
 void Game::updateMenuState()
@@ -138,7 +186,6 @@ void Game::updateGameState()
 
 		if (state == 1 and isGAMESTART == true)
 		{
-
 			fire.update(dt, mPlayer, bTex, ultiTex, SpawnEB, ultiRingTex);
 			spawnEne.update(dt, 600, eTex, gameLV);
 			SpawnEB.update(dt, spawnEne, ebulletTex, gameLV);
@@ -151,9 +198,9 @@ void Game::updateGameState()
 
 void Game::renderGameState()
 { 
-	if (state == 1 and mPlayer.hp > 0)
+	if ((state == 1 || state == 2)and mPlayer.hp > 0)
 	{
-		if (state == 1)
+		if (state == 1 || state == 2)
 		{
 			background.render(window);
 
@@ -217,12 +264,36 @@ void Game::collisionupdate(float LV)
 	collision.ultiAndEbullet(fire,SpawnEB);
 }
 
-int Game::reset()
+void Game::updateGamePauseState()
 {
-	gameLV = 0;
-	score = 0;
+	if (state == 2)
+	{
+		pause.update(state);
+	}
+}
 
-	return 1;
+void Game::renderGamePauseState()
+{
+	if (state == 2)
+	{
+		pause.render(window);
+	}
+}
+
+void Game::updateDeadState()
+{
+	if (state == 3)
+	{
+
+	}
+}
+
+void Game::renderDeadState()
+{
+	if (state == 3)
+	{
+
+	}
 }
 
 void Game::updateHowtoplayState()
