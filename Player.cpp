@@ -25,20 +25,20 @@ Player::~Player()
 
 void Player::reset()
 {
-	int hpMax = 3;
-	int hp = 3;
-	bool isTurnLeft = false;
-	bool isTurnRight = false;
-	bool isDamaged = false;
-	bool canUlti = false;
-	bool hitShield = false;
-	bool isSheildOn = false;
-	float shieldTimer = 0;
-	float damgedTotalTime = 0;
-	float ishit = false;
-	float hittime = 0;
-	int abilityCount = 0;
-	float totalTime = 0;
+	hpMax = 3;
+	hp = 3;
+	isTurnLeft = false;
+	isTurnRight = false;
+	isDamaged = false;
+	canUlti = false;
+	hitShield = false;
+	isSheildOn = false;
+	shieldTimer = 0;
+	damgedTotalTime = 0;
+	ishit = false;
+	hittime = 0;
+	abilityCount = 0;
+	totalTime = 0;
 	currentImage.x = 0;
 	currentImage.y = 0;
 	pRect.left = currentImage.x * pRect.width;

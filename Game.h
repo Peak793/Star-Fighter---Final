@@ -19,6 +19,7 @@
 #include "UI.h"
 #include "itemDropping.h"
 #include "GamePause.h"
+
 class Game
 {
 private:
@@ -35,6 +36,10 @@ private:
 		4	= HowToPlay
 		5	= LeaderBoard
 	*/
+	//Music
+	sf::SoundBuffer meTheme;
+	sf::Sound menuTheme;
+	sf::Time time;
 
 	//Menu state
 			Menu menu;

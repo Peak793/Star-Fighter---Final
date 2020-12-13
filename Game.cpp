@@ -8,6 +8,11 @@ Game::Game(int Width, int Height)
 	, howtoplay(Width, Height)
 	, ui(mPlayer.getPos())
 {
+	meTheme.loadFromFile("sound/Power Rangers Theme Heavy Metal.ogg");
+	menuTheme.setBuffer(meTheme);
+	menuTheme.setLoop(true);
+	menuTheme.setVolume(50);
+	menuTheme.play();
 	window.setFramerateLimit(120);
 	loadTexture();
 	loadObject();
@@ -19,7 +24,7 @@ Game::~Game()
 }
 
 void Game::restart()
-{
+{	
 	score = 0;
 	gameLV = 0;
 	isGAMESTART = false;
@@ -56,6 +61,7 @@ void Game::run() //Run The game
 void Game::updateDt()
 {
 	dt = dtClock.restart().asSeconds();
+	
 }
 
 
@@ -100,6 +106,7 @@ void Game::pollEvent()
 			{
 				state = 0;
 				pause.currentImage.x = 0;
+				menuTheme.play();
 				restart();
 			}
 			if (pause.currentImage.x == 2)
@@ -145,6 +152,13 @@ void Game::loadTexture()
 	{
 		//handle error
 	}
+
+	bTex.setSmooth(true);
+	eTex.setSmooth(true);
+	ebulletTex.setSmooth(true);
+	ultiTex.setSmooth(true);
+	ultiRingTex.setSmooth(true);
+	shieldRingTex.setSmooth(true);
 }
 
 void Game::update()
@@ -176,7 +190,9 @@ void Game::changeState()
 
 void Game::updateGameState()
 {
-	updateGameLV();
+	if (mPlayer.hp > 0)
+	{
+		updateGameLV();
 		if (state == 1)
 		{
 			mPlayer.update(dt, window.getSize().x, window.getSize().y, isGAMESTART);
@@ -194,11 +210,12 @@ void Game::updateGameState()
 			ui.update(dt, mPlayer.hp, mPlayer.hpMax, score, mPlayer.getPos(), mPlayer.abilityCount);
 			drop.update(dt);
 		}
+	}
 }
 
 void Game::renderGameState()
 { 
-	if ((state == 1 || state == 2)and mPlayer.hp > 0)
+	if ((state == 1 || state == 2 || state == 3))
 	{
 		if (state == 1 || state == 2)
 		{
@@ -322,7 +339,12 @@ void Game::menuUpdate()
 {
 	if (state == 0)
 	{
-		menu.update(state,window,dt);
+		restart();
+		menu.update(state, window, dt);
+		if (state != 0 and state != 4 and state != 5)
+		{
+			menuTheme.stop();
+		}
 	}
 }
 

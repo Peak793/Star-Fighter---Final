@@ -12,6 +12,9 @@ public:
 
 	float totalTime = 0;
 	float cooldown = 0.3; 
+
+	float totalTime2 = 0;
+	float spawnCooldown = 1;
 public:
 	SpawnEnemies();
 	~SpawnEnemies();

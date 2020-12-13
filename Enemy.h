@@ -13,6 +13,10 @@ private:
 	float speed = 200;
 	float totalTime = 0;
 	float switchTime = 0.1;
+	float vel = 200;
+
+	float totaltime2 = 0;
+	float switchTime2= 1;
 
 	//ishit
 	int hitTemp = 0;

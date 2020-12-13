@@ -16,13 +16,13 @@ void SpawnEbullet::reset()
 
 void SpawnEbullet::update(float dt,SpawnEnemies &SE,sf::Texture &texture,float LV)
 {
-	updateTime = 1;
-	if (totalTime < updateTime)
-	{
-		totalTime += dt;
-	}
-	else
-	{
+	//updateTime = 3;
+	//if (totalTime < updateTime)
+	//{
+	//	totalTime += dt;
+	//}
+	//else
+	//{
 		for (int i = 0; i < SE.enemies.size(); i++)
 		{
 			if (SE.enemies[i].canshoot == true )
@@ -31,7 +31,7 @@ void SpawnEbullet::update(float dt,SpawnEnemies &SE,sf::Texture &texture,float L
 				SE.enemies[i].canshoot = false;
 			}
 		}
-	}
+	//}
 	for (int i = 0; i < Ebullets.size(); i++)
 	{
 		Ebullets[i].update(dt);

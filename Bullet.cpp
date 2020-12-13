@@ -2,7 +2,7 @@
 
 Bullet::Bullet(sf::Texture& texture, sf::Vector2f playerPos)
 {
-	shape.setSize(sf::Vector2f (10.f,20.f));
+	shape.setSize(sf::Vector2f (10.f,30.f));
 	shape.setTexture(&texture);
 	shape.setOrigin(5, 10);
 	shape.setPosition(playerPos.x,playerPos.y-32);

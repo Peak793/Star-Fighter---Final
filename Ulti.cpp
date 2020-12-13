@@ -4,7 +4,7 @@ Ulti::Ulti(sf::Vector2f PlayerPos,sf::Texture &texture,sf::Texture &texture2)
 {
 	currentImage.x = 0;
 	currentImage.y = 0;
-	imageCount.x = 5;
+	imageCount.x = 6;
 	imageCount.y = 1;
 	ultiRect.width = texture.getSize().x / imageCount.x;
 	ultiRect.height = texture.getSize().y / imageCount.y;
@@ -13,7 +13,7 @@ Ulti::Ulti(sf::Vector2f PlayerPos,sf::Texture &texture,sf::Texture &texture2)
 	ulti.setTexture(texture);
 	ulti.setTextureRect(ultiRect);
 	ulti.setOrigin(ulti.getGlobalBounds().width/2,ulti.getGlobalBounds().height);
-	ulti.setPosition(PlayerPos.x,PlayerPos.y - 32);
+	ulti.setPosition(PlayerPos.x,PlayerPos.y - 16);
 
 	currentImage2.x = 0;
 	currentImage2.y = 0;
@@ -27,8 +27,9 @@ Ulti::Ulti(sf::Vector2f PlayerPos,sf::Texture &texture,sf::Texture &texture2)
 	ultiRing.setTextureRect(ultRingRect);
 	ultiRing.setOrigin(ultiRing.getGlobalBounds().width/2, ultiRing.getGlobalBounds().height/2);
 	ultiRing.setPosition(PlayerPos.x,PlayerPos.y);
+	ultiRing.setColor(sf::Color::Blue);
 
-
+	
 }
 
 Ulti::~Ulti()

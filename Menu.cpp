@@ -46,11 +46,11 @@ void Menu::render(sf::RenderTarget &target)
 		}
 }
 
-void Menu::update(float &state,sf::RenderWindow &window,float dt)
+int Menu::update(float &state,sf::RenderWindow &window,float dt)
 {
 		Move();
 		updateLogo();
-		pressMenu(state,window,dt);
+		return (pressMenu(state,window,dt));
 }
 
 void Menu::Move()
@@ -166,7 +166,7 @@ void Menu::updateLogo()
 		}
 }
 
-void Menu::pressMenu(float &state,sf::RenderWindow &window,float dt)
+int Menu::pressMenu(float &state,sf::RenderWindow &window,float dt)
 {
 	if (pressTimer < pressAbleTime)
 	{
@@ -179,6 +179,7 @@ void Menu::pressMenu(float &state,sf::RenderWindow &window,float dt)
 		{
 		case 0:
 			state = 1;
+			return 1;
 			break;
 		case 1:
 			state = 4;

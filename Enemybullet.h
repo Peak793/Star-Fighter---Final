@@ -4,7 +4,7 @@ class Enemybullet
 {
 public:
 	sf::CircleShape ebullet;
-	int speed;
+	int speed =500;
 	int damage;
 public:
 	Enemybullet(sf::Texture &texture, sf::Vector2f enemyPos,int LV, int EnemyDamage);

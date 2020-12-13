@@ -65,7 +65,9 @@ void Fire::update(float dt, Player& player, sf::Texture& texture,sf::Texture& ul
 	{
 		totalTime = 0 ;
 		canshoot = false;
-		bullets.push_back(Bullet(texture,player.getPos()));
+		bullets.push_back(Bullet(texture, sf::Vector2f(player.getPos().x , player.getPos().y-10)));
+		bullets.push_back(Bullet(texture,sf::Vector2f(player.getPos().x-10,player.getPos().y)));
+		bullets.push_back(Bullet(texture, sf::Vector2f(player.getPos().x + 10, player.getPos().y)));
 	}
 
 	for (int i = 0; i < bullets.size(); i++)

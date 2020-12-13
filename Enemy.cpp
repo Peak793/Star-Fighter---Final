@@ -27,15 +27,26 @@ Enemy::~Enemy()
 void Enemy::update(float dt, float width, float LV)
 {
 	updateCanshoot(dt);
-	if (eSprite.getPosition().y < spawnPosition.y)
+	//if (eSprite.getPosition().y < spawnPosition.y)
+	//{
+	//	eSprite.move(0, dt * 300);
+	//}
+	//else
+	//{
+	if (totaltime2 <= switchTime2)
 	{
-		eSprite.move(0, dt * 300);
+		totaltime2 += dt;
 	}
-	else
+
+	if (totaltime2 >= switchTime2)
 	{
+		totaltime2 -= switchTime2;
+		dir = rand() % 2;
+	}
+
 		if (dir == 0)
 		{
-			eSprite.move(-dt * speed, 0);
+			eSprite.move(-dt * speed, dt * vel);
 			if (eSprite.getPosition().x <= eSprite.getGlobalBounds().width / 2)
 			{
 				eSprite.setPosition(eSprite.getGlobalBounds().width / 2, eSprite.getPosition().y);
@@ -44,14 +55,14 @@ void Enemy::update(float dt, float width, float LV)
 		}
 		else if (dir == 1)
 		{
-			eSprite.move(dt * speed, 0);
+			eSprite.move(dt * speed, dt * vel);
 			if (eSprite.getPosition().x >= width - eSprite.getGlobalBounds().width / 2)
 			{
 				eSprite.setPosition(width - eSprite.getGlobalBounds().width / 2, eSprite.getPosition().y);
 				dir = !dir;
 			}
 		}
-	}
+	/*}*/
 	animation(dt);
 }
 
