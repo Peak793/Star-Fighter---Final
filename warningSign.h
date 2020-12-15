@@ -18,7 +18,7 @@ public:
 public:
 	warningSign(sf::Texture &texture,sf::Vector2f playerPos);
 	~warningSign();
-	void update(float dt, sf::Vector2f playerPos);
+	void update(float dt, sf::Vector2f playerPos, float& LV);
 	void render(sf::RenderTarget& target);
 };
 

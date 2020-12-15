@@ -7,8 +7,8 @@ class SpawnEnemies
 public:
 	std::vector<Enemy> enemies;
 	int enemiesCount = 0;
-	int maxEnemiesCount = 5;
-	
+	int maxEnemiesCount = 8;
+	int L = 3;
 
 	float totalTime = 0;
 	float cooldown = 0.3; 

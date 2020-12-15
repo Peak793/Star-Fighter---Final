@@ -21,8 +21,13 @@ warningSign::~warningSign()
 {
 }
 
-void warningSign::update(float dt,sf::Vector2f playerPos)
+void warningSign::update(float dt,sf::Vector2f playerPos,float &LV)
 {
+	switchTime2 = 3;
+	if (LV >= 5)
+	{
+		switchTime2 = 1.5;
+	}
 	totalTime += dt;
 	totalTime2 += dt;
 	if (totalTime2 >= switchTime2 && isFinished == false)

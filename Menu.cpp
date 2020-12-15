@@ -46,31 +46,38 @@ void Menu::render(sf::RenderTarget &target)
 		}
 }
 
-int Menu::update(float &state,sf::RenderWindow &window,float dt)
+int Menu::update(float &state,sf::RenderWindow &window,float dt,sf::Sound &clickS,sf::Music& bgtheme)
 {
-		Move();
+		Move(clickS,dt);
 		updateLogo(state);
-		return (pressMenu(state,window,dt));
+		return (pressMenu(state,window,dt,bgtheme));
 }
 
-void Menu::Move()
+void Menu::Move(sf::Sound &clickS,float dt)
 {
 	//Move the Menu
-	
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && clock.getElapsedTime().asMilliseconds() >= 200)
+	if (totalTime < switchTime)
 	{
+		totalTime += dt;
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && totalTime >= switchTime)
+	{
+		totalTime = 0;
 		if ((selectedIndex) - 1 >= 0)
 		{
+			clickS.play();
 			menu[selectedIndex].setFillColor(sf::Color::Black);
 			selectedIndex--;
 			menu[selectedIndex].setFillColor(sf::Color::Red);
 			clock.restart();
 		}
 	}
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) && clock.getElapsedTime().asMilliseconds() >= 200)
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) && totalTime >= switchTime)
 	{
+		totalTime = 0;
 		if ((selectedIndex) + 1 < MAX_SIZE_OF_ITEMS)
 		{
+			clickS.play();
 			menu[selectedIndex].setFillColor(sf::Color::Black);
 			selectedIndex++;
 			menu[selectedIndex].setFillColor(sf::Color::Red);
@@ -171,7 +178,7 @@ void Menu::updateLogo(float state)
 		}
 }
 
-int Menu::pressMenu(float &state,sf::RenderWindow &window,float dt)
+int Menu::pressMenu(float &state,sf::RenderWindow &window,float dt,sf::Music &music)
 {
 	if (pressTimer < pressAbleTime)
 	{
@@ -179,11 +186,12 @@ int Menu::pressMenu(float &state,sf::RenderWindow &window,float dt)
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && pressTimer >= pressAbleTime)
 	{
-		pressTimer -= pressAbleTime;
+		pressTimer =0;
 		switch (selectedIndex)
 		{
 		case 0:
 			state = 1;
+			music.play();
 			return 1;
 			break;
 		case 1:

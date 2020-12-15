@@ -21,7 +21,7 @@ void Fire::reset()
 	ultis.clear();
 }
 
-void Fire::update(float dt, Player& player, sf::Texture& texture,sf::Texture& ultiTex, SpawnEbullet& EB,sf::Texture &ultiRingTex)
+void Fire::update(float dt, Player& player, sf::Texture& texture, sf::Texture& ultiTex, SpawnEbullet& EB, sf::Texture& ultiRingTex, sf::Sound& fireA, sf::Sound& ultiS)
 {
 	if (totalTime < cooldown)
 	{
@@ -38,6 +38,7 @@ void Fire::update(float dt, Player& player, sf::Texture& texture,sf::Texture& ul
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) and isUltiReady == true)
 	{
 		/*EB.Ebullets.clear();*/
+		ultiS.play();
 		std::cout << "Fire ULT" << std::endl;
 		isUltiReady = false;
 		isUltiPlaying = true;
@@ -58,13 +59,15 @@ void Fire::update(float dt, Player& player, sf::Texture& texture,sf::Texture& ul
 		{
 			ultiTimer = 0;
 			isUltiPlaying = false;
+			ultiS.stop();
 			ultis.clear();
 		}
 	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) and canshoot == true and isUltiPlaying == false)
+	if (/*sf::Keyboard::isKeyPressed(sf::Keyboard::Space) and */canshoot == true and isUltiPlaying == false)
 	{
 		totalTime = 0 ;
 		canshoot = false;
+		fireA.play();
 		bullets.push_back(Bullet(texture, sf::Vector2f(player.getPos().x , player.getPos().y-10)));
 		bullets.push_back(Bullet(texture,sf::Vector2f(player.getPos().x-10,player.getPos().y)));
 		bullets.push_back(Bullet(texture, sf::Vector2f(player.getPos().x + 10, player.getPos().y)));

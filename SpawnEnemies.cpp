@@ -19,8 +19,20 @@ void SpawnEnemies::reset()
 
 void SpawnEnemies::update(float dt, float width, sf::Texture& texture,float gameLV)
 {
-	
-	maxEnemiesCount = 5 + (gameLV);
+	if (gameLV == 0)
+	{
+		L = 3;
+	}
+	if (gameLV >= 1 and gameLV < 2)
+	{
+		L = 4;
+	}
+	if (gameLV >= 2)
+	{
+		L = 5;
+	}
+
+
 	//if (maxEnemiesCount > 10)
 	//{
 	//	maxEnemiesCount = 10;
@@ -28,7 +40,7 @@ void SpawnEnemies::update(float dt, float width, sf::Texture& texture,float game
 	if (totalTime2 < spawnCooldown)
 	{
 		totalTime2 += dt;
-		if (enemiesCount < 3)
+		if (enemiesCount < L)
 		{
 			enemies.push_back(Enemy(texture, sf::Vector2f(32 + (rand() % 536), 64 + (rand() % 5 * 64)), gameLV));
 			enemiesCount++;

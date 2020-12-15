@@ -30,7 +30,9 @@ private:
 	bool FontSelect;
 	int updatelogo = -20;
 	float pressTimer = 0;
-	float pressAbleTime = 0.5;
+	float pressAbleTime = 1;
+	float totalTime = 0;
+	float switchTime = 0.2;
 
 
 public:
@@ -41,12 +43,12 @@ public:
 	~Menu();
 
 	void	render(sf::RenderTarget &target);
-	int	update(float &state, sf::RenderWindow& window,float dt);
-	void	Move();
+	int	update(float &state, sf::RenderWindow& window,float dt,sf::Sound &clickS,sf::Music &bgtheme);
+	void	Move(sf::Sound& clickS,float dt);
 
 
 	void	initMenu(float Width, float Height);
 	void	initLogo(float Width, float Height);
 	void	updateLogo(float state);
-	int	pressMenu(float &state, sf::RenderWindow& window,float dt);
+	int	pressMenu(float &state, sf::RenderWindow& window,float dt, sf::Music& music);
 };

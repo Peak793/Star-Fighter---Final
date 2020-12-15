@@ -42,6 +42,7 @@ private:
 	//Music
 	sf::SoundBuffer meTheme;
 	sf::Sound menuTheme;
+	sf::Music bgTheme;
 	sf::Time time;	
 
 	//Menu state
@@ -49,7 +50,7 @@ private:
 
 	//Game state
 		//Variables
-			int score = 0;;
+			int score = 0;
 			float gameLV = 0;
 		
 		//Background
@@ -124,10 +125,21 @@ private:
 			sf::Font font2;
 			float totalTimeDead = 0;
 			float switchTimeDead = 0.1;
+
 			//std::string t;
 
 			//sound effect
+			sf::SoundBuffer click;
+			sf::SoundBuffer fireA;
+			sf::SoundBuffer boom;
+			sf::SoundBuffer ultiB;
+			sf::SoundBuffer warning;
 
+			sf::Sound clickS;
+			sf::Sound fireS;
+			sf::Sound boomS;
+			sf::Sound ultiS;
+			sf::Music warningS;
 private:
 
 public:
@@ -138,6 +150,7 @@ public:
 	~Game();
 	void		restart();
 	void		restartMucsic();
+	void		loadSoundFX();
 
 	void		run();
 	void		updateDt();

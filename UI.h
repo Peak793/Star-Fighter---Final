@@ -2,6 +2,7 @@
 
 #include "SFML/Graphics.hpp"
 
+
 class UI
 {
 public:
@@ -10,7 +11,8 @@ public:
 	sf::Font font;
 
 	//Player
-	sf::RectangleShape hpback;
+	sf::Sprite hpback;
+	sf::Texture hpbackTex;
 	sf::RectangleShape hp;
 	sf::RectangleShape abilityback;
 	sf::RectangleShape ability;
@@ -27,6 +29,6 @@ public:
 	~UI();
 
 
-	void			update(float dt, int hp, int hpmax, int score, sf::Vector2f playerPos,int& abilityCount);
+	void			update(float dt, int hp, int hpmax, int score, sf::Vector2f playerPos,int& abilityCount, bool isultiready);
 	void			render(sf::RenderTarget &target);
 };

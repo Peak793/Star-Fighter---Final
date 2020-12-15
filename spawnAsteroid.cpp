@@ -16,21 +16,31 @@ void spawnAsteroid::reset()
 	warning.clear();
 }
 
-void spawnAsteroid::update(float dt, sf::Vector2f playerPos)
+void spawnAsteroid::update(float dt, sf::Vector2f playerPos,sf::Music &warningS,float &LV)
 {
+	switchTime = 20;
+	if (LV >= 1 and LV < 2)
+	{
+		switchTime = 15;
+	}
+	if (LV >= 2 and LV < 3)
+	{
+		switchTime = 10;
+	}
 	if(totaltime < switchTime)
 		totaltime += dt;
 
 	if (totaltime >= switchTime)
 	{
 		totaltime -= switchTime;
+		warningS.play();
 		warning.push_back(warningSign(warningTex,playerPos));
 	}
 
 	//warning update
 	for (int i = 0; i < warning.size(); i++)
 	{
-		warning[i].update(dt,playerPos);
+		warning[i].update(dt,playerPos,LV);
 	}
 
 	//spawn asteroid
@@ -38,6 +48,7 @@ void spawnAsteroid::update(float dt, sf::Vector2f playerPos)
 	{
 		if (warning[i].isFinished == true)
 		{
+			warningS.stop();
 			asteroid.push_back(Asteriod(asteroidTex, warning[i].sprite.getPosition()));
 			warning.erase(warning.begin()+i);
 			break;

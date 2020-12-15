@@ -19,7 +19,7 @@ Asteriod::Asteriod(sf::Texture &asteriodTex,sf::Vector2f signPos)
 	hitbox.setOrigin(hitbox.getSize().x / 2, hitbox.getSize().y/2);
 	hitbox.setFillColor(sf::Color::Transparent);
 	hitbox.setOutlineThickness(1.0);
-	hitbox.setOutlineColor(sf::Color::Blue);
+	hitbox.setOutlineColor(sf::Color::Transparent);
 	hitbox.setPosition(asteroid.getPosition().x,asteroid.getPosition().y+20);
 	asteroid.setScale(1.5,1.5);
 	hitbox.setScale(1.5,1.5);

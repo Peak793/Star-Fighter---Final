@@ -1,13 +1,24 @@
 #include "Collision.h"
 Collision::Collision()
 {
+	sheildupB.loadFromFile("sound/sfx_shieldUp.ogg");
+	sheildup.setBuffer(sheildupB);
+
+	hpupB.loadFromFile("sound/g31qtn_ui-82.wav");
+	hpup.setBuffer(hpupB);
+
+	powerupB.loadFromFile("sound/phaserUp7.ogg");
+	powerup.setBuffer(powerupB);
+
+	deadFx.loadFromFile("sound/Sekiro Death Sound Effect.ogg");
+	deadS.setBuffer(deadFx);
 }
 
 Collision::~Collision()
 {
 }
 
-void Collision::bulletAndenemies(Fire& B, SpawnEnemies& E,int &score,AddExplo &ADEX,sf::Texture &texture,int LV,itemDropping &drop,float dt,Player &player)
+void Collision::bulletAndenemies(Fire& B, SpawnEnemies& E,int &score,AddExplo &ADEX,sf::Texture &texture,int LV,itemDropping &drop,float dt,Player &player,sf::Sound &boom)
 {
 	for (int i = 0; i < B.bullets.size(); i++)
 	{
@@ -20,6 +31,7 @@ void Collision::bulletAndenemies(Fire& B, SpawnEnemies& E,int &score,AddExplo &A
 				B.bullets.erase(B.bullets.begin() + i);
 				if (E.enemies[k].hp <= 0)
 				{
+					boom.play();
 					player.abilityCount += 2;
 					if (player.abilityCount > 100)
 						player.abilityCount = 100;
@@ -41,6 +53,7 @@ void Collision::bulletAndenemies(Fire& B, SpawnEnemies& E,int &score,AddExplo &A
 		{
 			if (B.ultis[i].ulti.getGlobalBounds().intersects(E.enemies[j].getGlobalBounds()))
 			{
+				boom.play();
 				ADEX.DeadAni(texture, E.enemies[j].getPos());
 				//drop.randomChance();
 				//drop.drop(E.enemies[j].getPos(), dt);
@@ -53,7 +66,7 @@ void Collision::bulletAndenemies(Fire& B, SpawnEnemies& E,int &score,AddExplo &A
 	}
 }
 
-void Collision::EbulletAndPlayer(Player& player, SpawnEbullet& EB,float &state)
+void Collision::EbulletAndPlayer(Player& player, SpawnEbullet& EB,float &state,sf::Music &bgTheme)
 {
 	if(player.isSheildOn == false)
 	for (int i = 0; i < EB.Ebullets.size(); i++)
@@ -64,6 +77,8 @@ void Collision::EbulletAndPlayer(Player& player, SpawnEbullet& EB,float &state)
 			player.hp -= EB.Ebullets[i].damage;
 			if (player.hp == 0)
 			{
+				bgTheme.stop();
+				deadS.play();
 				state = 3;
 			}
 			EB.Ebullets.erase(EB.Ebullets.begin()+i);
@@ -85,7 +100,7 @@ void Collision::EbulletAndPlayer(Player& player, SpawnEbullet& EB,float &state)
 		player.hp = 0;
 }
 
-void Collision::EnemiesAndPlayer(Player& player, SpawnEnemies& E,AddExplo &ADEX,sf::Texture &texture,float &state)
+void Collision::EnemiesAndPlayer(Player& player, SpawnEnemies& E,AddExplo &ADEX,sf::Texture &texture,float &state, sf::Music& bgTheme)
 {
 	if (player.isSheildOn == false)
 	{
@@ -98,6 +113,8 @@ void Collision::EnemiesAndPlayer(Player& player, SpawnEnemies& E,AddExplo &ADEX,
 					player.hp -= E.enemies[i].damage;
 				if(player.hp == 0)
 				{
+					bgTheme.stop();
+					deadS.play();
 					state = 3;
 				}
 				if (E.enemies[i].hp <= 0)
@@ -136,6 +153,7 @@ void Collision::itemAndPlayer(Player& player, itemDropping& drop)
 	{
 		if (drop.item1[i].getGlobalBounds().intersects(player.getGlobalbounds()))
 		{
+			hpup.play();
 			player.hp += drop.item1[i].plushp;
 			if (player.hp >3)
 				player.hp = 3;
@@ -149,6 +167,7 @@ void Collision::itemAndPlayer(Player& player, itemDropping& drop)
 	{
 		if (drop.item2[i].getGlobalBounds().intersects(player.getGlobalbounds()))
 		{
+			sheildup.play();
 			if (player.hitShield == false and player.isSheildOn == false)
 			{
 				player.hitShield = true;
@@ -163,6 +182,7 @@ void Collision::itemAndPlayer(Player& player, itemDropping& drop)
 	{
 		if (drop.item3[i].getGlobalBounds().intersects(player.getGlobalbounds()))
 		{
+			powerup.play();
 			player.abilityCount += 100;
 			if (player.abilityCount > 100)
 			{
@@ -174,7 +194,7 @@ void Collision::itemAndPlayer(Player& player, itemDropping& drop)
 	}
 }
 
-void Collision::ultiAndEbullet(Fire& bullet, SpawnEbullet& EB,spawnAsteroid &asteriod,AddExplo &ADEX,sf::Texture &texture)
+void Collision::ultiAndEbullet(Fire& bullet, SpawnEbullet& EB,spawnAsteroid &asteriod,AddExplo &ADEX,sf::Texture &texture,sf::Sound &boomS)
 {
 	for (int i = 0; i < bullet.ultis.size(); i++)
 	{
@@ -182,6 +202,7 @@ void Collision::ultiAndEbullet(Fire& bullet, SpawnEbullet& EB,spawnAsteroid &ast
 		{
 			if (bullet.ultis[i].ulti.getGlobalBounds().intersects(EB.Ebullets[j].getGlobalBounds()))
 			{
+				boomS.play();
 				EB.Ebullets.erase(EB.Ebullets.begin()+j);
 				break;
 			}
@@ -200,7 +221,7 @@ void Collision::ultiAndEbullet(Fire& bullet, SpawnEbullet& EB,spawnAsteroid &ast
 	}
 }
 
-void Collision::asteroidAndplayer(Player& player, spawnAsteroid &asteroid,AddExplo &ADEX,sf::Texture &texture,float &state)
+void Collision::asteroidAndplayer(Player& player, spawnAsteroid &asteroid,AddExplo &ADEX,sf::Texture &texture,float &state, sf::Music& bgTheme)
 {
 	for (int i = 0; i < asteroid.asteroid.size(); i++)
 	{
@@ -210,18 +231,22 @@ void Collision::asteroidAndplayer(Player& player, spawnAsteroid &asteroid,AddExp
 			{
 				ADEX.DeadAni(texture, asteroid.asteroid[i].asteroid.getPosition());
 				asteroid.asteroid.erase(asteroid.asteroid.begin() + i);
-				state = 3;
+				player.Sheild.erase(player.Sheild.begin()+j);
+				player.isSheildOn = false;
+				player.shieldTimer = 0;
 				break;
 			}
 		}
 	}
 	for (int i = 0; i < asteroid.asteroid.size(); i++)
 	{
-		if (asteroid.asteroid[i].asteroid.getGlobalBounds().intersects(player.getGlobalbounds()) and player.ishit == false)
+		if (asteroid.asteroid[i].asteroid.getGlobalBounds().intersects(player.getGlobalbounds()) and player.isDamaged == false and player.isSheildOn == false)
 		{
 			ADEX.DeadAni(texture,asteroid.asteroid[i].asteroid.getPosition());
 			asteroid.asteroid.erase(asteroid.asteroid.begin()+i);
 			player.hp = 0;
+			bgTheme.stop();
+			deadS.play();
 			state = 3;
 		}
 	}

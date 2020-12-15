@@ -8,7 +8,7 @@ class SpawnEbullet
 public:
 	std::vector<Enemybullet> Ebullets;
 	float totalTime = 0;
-	float updateTime = 1;
+	float updateTime = 3;
 public:
 	SpawnEbullet();
 	~SpawnEbullet();

@@ -3,6 +3,7 @@
 UI::UI(sf::Vector2f playerPos)
 {
 	font.loadFromFile("fonts/TarrgetAcademyItalic-qzmx.otf");
+	hpbackTex.loadFromFile("img/hpback.png");
 
 	//setFont
 	//hpText.setFont(font);
@@ -14,7 +15,7 @@ UI::UI(sf::Vector2f playerPos)
 	abilityback.setSize( sf::Vector2f(64.f,6.f));
 	abilityback.setFillColor(sf::Color::White);
 	abilityback.setPosition(playerPos.x-32,playerPos.y + 38);
-	ability.setFillColor(sf::Color(80,80,80));
+	ability.setFillColor(sf::Color::Red);
 	ability.setSize(sf::Vector2f(0.f, 6.f));
 	ability.setPosition(playerPos.x - 32, playerPos.y + 38);
 
@@ -26,10 +27,9 @@ UI::UI(sf::Vector2f playerPos)
 	Score.setPosition(370-Score.getGlobalBounds().width/2,4);
 
 	//RectangleShape setup
-	hpback.setSize(sf::Vector2f(64.f, 6.f));
-	hpback.setFillColor(sf::Color::White);
 	/*hpback.setOutlineColor(sf::Color::White);
 	hpback.setOutlineThickness(2.f);*/
+	hpback.setTexture(hpbackTex);
 	hpback.setPosition(playerPos.x-32, playerPos.y + 32);
 
 	hp.setSize(sf::Vector2f(64.f, 6.f));
@@ -45,11 +45,14 @@ UI::~UI()
 {
 }
 
-void UI::update(float dt,int hp,int hpmax,int score,sf::Vector2f playerPos,int &abilityCount)
+void UI::update(float dt,int hp,int hpmax,int score,sf::Vector2f playerPos,int &abilityCount,bool isultiready)
 {
 	hpText.setString(std::to_string(hp) + "/" + std::to_string(hpmax));
 	Score.setString("SCORE : " + std::to_string(score));
-	
+	if (isultiready == false)
+	{
+		ability.setFillColor(sf::Color::Red);
+	}
 	if (hp > 0)
 	{
 		this->hp.setSize(sf::Vector2f((hp * 64) / 3, 6));
@@ -70,7 +73,7 @@ void UI::update(float dt,int hp,int hpmax,int score,sf::Vector2f playerPos,int &
 	}
 
 	hpback.setPosition(playerPos.x-32, playerPos.y + 32);
-	this->hp.setPosition(playerPos.x - hpback.getSize().x / 2, playerPos.y + 32);
+	this->hp.setPosition(playerPos.x - 32, playerPos.y + 32);
 	ability.setPosition(playerPos.x - 32, playerPos.y + 38);
 	abilityback.setPosition(playerPos.x - 32, playerPos.y + 38);
 	/*hpText.setPosition(this->hp.getPosition());*/
@@ -79,9 +82,9 @@ void UI::update(float dt,int hp,int hpmax,int score,sf::Vector2f playerPos,int &
 void UI::render(sf::RenderTarget& target)
 {
 	target.draw(Score);
-	target.draw(hpback);
 	target.draw(hp);
 	target.draw(hpText);
-	target.draw(abilityback);
+	/*target.draw(abilityback);*/
 	target.draw(ability);
+	target.draw(hpback);
 }

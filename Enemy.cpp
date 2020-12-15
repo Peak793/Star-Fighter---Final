@@ -17,7 +17,27 @@ Enemy::Enemy(sf::Texture& texture, sf::Vector2f spawnPos, float LV)
 	spawnPosition = spawnPos;
 	eSprite.setPosition(spawnPosition.x, -100);
 
-	canshootTime = 1;
+	canshootTime = 3;
+	if (LV >= 1 and LV<2)
+	{
+		canshootTime = 2.5;
+	}
+	if (LV >= 2 and LV <3)
+	{
+		canshootTime = 2;
+	}
+	if (LV >= 3 and LV<4)
+	{
+		canshootTime = 1.5;
+	}
+	if (LV >= 4 and LV <5)
+	{
+		canshootTime = 1;
+	}
+	if (LV >= 5)
+	{
+		canshootTime = 0.8;
+	}
 }
 
 Enemy::~Enemy()

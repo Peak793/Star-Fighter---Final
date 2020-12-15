@@ -8,13 +8,17 @@ Game::Game(int Width, int Height)
 	, howtoplay(Width, Height)
 	, ui(mPlayer.getPos())
 {
-	meTheme.loadFromFile("sound/Full menubgTheme.ogg");
+	bgTheme.openFromFile("sound/Full menubgTheme.ogg");
+	bgTheme.setLoop(true);
+	bgTheme.setVolume(20);
+	meTheme.loadFromFile("sound/menutheme.ogg");
 	menuTheme.setBuffer(meTheme);
 	menuTheme.setLoop(true);
-	menuTheme.setVolume(60);
+	menuTheme.setVolume(110);
 	menuTheme.play();
 	window.setFramerateLimit(120);
 	loadTexture();
+	loadSoundFX();
 	loadObject();
 }
 
@@ -44,6 +48,26 @@ void Game::restart()
 void Game::restartMucsic()
 {
 	
+}
+
+void Game::loadSoundFX()
+{
+	click.loadFromFile("sound/wtm5v6_ui-79.wav");
+	clickS.setBuffer(click);
+	clickS.setVolume(30);
+	fireA.loadFromFile("sound/laser1.ogg");
+	fireS.setBuffer(fireA);
+	fireS.setVolume(70);
+	boom.loadFromFile("sound/mixkit-8-bit-bomb-explosion-2811.wav");
+	boomS.setBuffer(boom);
+	boomS.setVolume(10);
+	ultiB.loadFromFile("sound/Sci-Fi Energy Release Sound Effect.ogg");
+	ultiS.setBuffer(ultiB);
+	ultiS.setVolume(50);
+	warning.loadFromFile("sound/alert.ogg");
+	warningS.openFromFile("sound/alert.ogg");
+	warningS.setLoop(true);
+	warningS.setVolume(20);
 }
 
 
@@ -90,17 +114,24 @@ void Game::pollEvent()
 		if (event.type == sf::Event::KeyPressed and event.key.code == sf::Keyboard::Escape && state == 0)
 			window.close();
 		if (event.type == sf::Event::KeyPressed and event.key.code == sf::Keyboard::Escape && state == 1)
+		{
 			state = 2;
+			bgTheme.pause();
+		}
 
 		if (event.type == sf::Event::KeyPressed and event.key.code == sf::Keyboard::W && state == 2)
 		{
 			pause.currentImage.x--;
+			clickS.play();
 			if (pause.currentImage.x < 0)
+			{
 				pause.currentImage.x = 0;
+			}
 		}
 		if (event.type == sf::Event::KeyPressed and event.key.code == sf::Keyboard::S && state == 2)
 		{
 			pause.currentImage.x++;
+			clickS.play();
 			if (pause.currentImage.x > 2)
 				pause.currentImage.x = 2;
 		}
@@ -109,10 +140,12 @@ void Game::pollEvent()
 			if (pause.currentImage.x == 0)
 			{
 				state = 1;
+				bgTheme.play();
 			}
 			if (pause.currentImage.x == 1)
 			{
 				state = 0;
+				bgTheme.stop();
 				pause.currentImage.x = 0;
 				menuTheme.play();
 				restart();
@@ -130,12 +163,12 @@ void Game::pollEvent()
 
 		if (event.type == sf::Event::TextEntered and state == 3)
 		{
-			if (event.text.unicode < 128 and playername.length() < 10 and event.text.unicode != 8 and event.text.unicode != 13)
+			if ((event.text.unicode<128 and event.text.unicode>=65)and playername.length() < 10 and event.text.unicode != 8 and event.text.unicode != 13 and event.text.unicode !=32)
 			{
 				playername += event.text.unicode;
 				name.setString(playername);
 			}
-			else if (playername.length() < 10 and playername.length() >0 and event.text.unicode == 8 and event.text.unicode != 13)
+			else if (playername.length() >0 and event.text.unicode == 8 and event.text.unicode != 13)
 			{
 				playername.pop_back();
 				name.setString(playername);
@@ -162,9 +195,9 @@ void Game::pollEvent()
 					{
 						std::cout << allname[i] << " :: " << allscore[i] << std::endl;
 					}
-					for (int z = 0; z < 5; z++)
+					for (int z = 0; z < 5/*n-1*/; z++)
 					{
-						for (int x = 0; x < 5 - z; x++)
+						for (int x = 0; x < 5 - z/*n-i-1*/; x++)
 						{
 							if (allscore[x] < allscore[x + 1])
 							{
@@ -254,11 +287,11 @@ void Game::loadTexture()
 	font2.loadFromFile("fonts/ROGFontsv1.6-Regular.ttf");
 	for (int i = 0; i < 5; i++)
 	{
-		text[i].setFont(font);
+		text[i].setFont(font2);
 		text[i].setFillColor(sf::Color::Black);
 		text[i].setOutlineColor(sf::Color::White);
-		text[i].setOutlineThickness(1);
-		text[i].setCharacterSize(30);
+		text[i].setOutlineThickness(3);
+		text[i].setCharacterSize(50);
 	}
 
 	//Dead state
@@ -324,14 +357,14 @@ void Game::updateGameState()
 
 		if (state == 1 and isGAMESTART == true)
 		{
-			fire.update(dt, mPlayer, bTex, ultiTex, SpawnEB, ultiRingTex);
+			fire.update(dt, mPlayer, bTex, ultiTex, SpawnEB, ultiRingTex,fireS,ultiS);
 			spawnEne.update(dt, 600, eTex, gameLV);
 			SpawnEB.update(dt, spawnEne, ebulletTex, gameLV);
 			collisionupdate(gameLV);
 			ADEX.update(dt);
-			ui.update(dt, mPlayer.hp, mPlayer.hpMax, score, mPlayer.getPos(), mPlayer.abilityCount);
+			ui.update(dt, mPlayer.hp, mPlayer.hpMax, score, mPlayer.getPos(), mPlayer.abilityCount,mPlayer.abilityCount == 100);
 			drop.update(dt);
-			asteroid.update(dt,mPlayer.getPos());
+			asteroid.update(dt,mPlayer.getPos(),warningS,gameLV);
 		}
 	}
 }
@@ -393,12 +426,12 @@ void Game::updateGameLV()
 
 void Game::collisionupdate(float LV)
 {
-	collision.bulletAndenemies(fire,spawnEne,score,ADEX,eTex,LV,drop,dt,mPlayer);
-	collision.EbulletAndPlayer(mPlayer,SpawnEB,state); 
-	collision.EnemiesAndPlayer(mPlayer,spawnEne,ADEX,eTex,state);
+	collision.bulletAndenemies(fire,spawnEne,score,ADEX,eTex,LV,drop,dt,mPlayer,boomS);
+	collision.EbulletAndPlayer(mPlayer,SpawnEB,state,bgTheme); 
+	collision.EnemiesAndPlayer(mPlayer,spawnEne,ADEX,eTex,state,bgTheme);
 	collision.itemAndPlayer(mPlayer,drop);
-	collision.ultiAndEbullet(fire,SpawnEB,asteroid,ADEX,eTex);
-	collision.asteroidAndplayer(mPlayer,asteroid,ADEX,eTex,state);
+	collision.ultiAndEbullet(fire,SpawnEB,asteroid,ADEX,eTex,boomS);
+	collision.asteroidAndplayer(mPlayer,asteroid,ADEX,eTex,state,bgTheme);
 }
 
 void Game::updateGamePauseState()
@@ -529,7 +562,7 @@ void Game::menuUpdate()
 	if (state == 0)
 	{
 		restart();
-		menu.update(state, window, dt);
+		menu.update(state, window, dt,clickS,bgTheme);
 		if (state != 0 and state != 4 and state != 5)
 		{
 			menuTheme.stop();
