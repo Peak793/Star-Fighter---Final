@@ -47,6 +47,6 @@ public:
 
 	void	initMenu(float Width, float Height);
 	void	initLogo(float Width, float Height);
-	void	updateLogo();
+	void	updateLogo(float state);
 	int	pressMenu(float &state, sf::RenderWindow& window,float dt);
 };

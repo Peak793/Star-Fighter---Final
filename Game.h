@@ -19,6 +19,9 @@
 #include "UI.h"
 #include "itemDropping.h"
 #include "GamePause.h"
+#include "spawnAsteroid.h"
+#include <fstream>
+#include <iostream>
 
 class Game
 {
@@ -39,11 +42,10 @@ private:
 	//Music
 	sf::SoundBuffer meTheme;
 	sf::Sound menuTheme;
-	sf::Time time;
+	sf::Time time;	
 
 	//Menu state
 			Menu menu;
-
 
 	//Game state
 		//Variables
@@ -74,6 +76,9 @@ private:
 		//Enemy's bullets
 			sf::Texture ebulletTex;
 			SpawnEbullet SpawnEB;
+
+		//SpawnAsteroid
+			spawnAsteroid asteroid;
 	
 		//Collision
 			Collision collision;
@@ -95,6 +100,34 @@ private:
 
 		//Pause menu
 			GamePause pause;
+
+		//leaderBoard
+			sf::Font font;
+			sf::Text lead;
+			sf::Text text[6] = {};
+			std::string str;
+			sf::Sprite leaderBG;
+			sf::Texture Leadtex;
+			bool isread = false;
+
+		//Dead state
+			sf::Texture deadTex;
+			sf::Sprite deadbg;
+			sf::Vector2f deadimageCount;
+			sf::Vector2f deadcurrentImage;
+			sf::IntRect deadRect;
+			sf::Text name;
+			std::string allname[6] = {};
+			int allscore[6] = {};
+			std::string o;
+			std::string playername;
+			sf::Font font2;
+			float totalTimeDead = 0;
+			float switchTimeDead = 0.1;
+			//std::string t;
+
+			//sound effect
+
 private:
 
 public:
@@ -104,6 +137,7 @@ public:
 	Game(int Width, int Height);
 	~Game();
 	void		restart();
+	void		restartMucsic();
 
 	void		run();
 	void		updateDt();
@@ -138,4 +172,8 @@ public:
 	//How to play
 	void		updateHowtoplayState();
 	void		renderHowtoplayState();
+
+	//leaderboard state
+	void		updateleaderboard();
+	void		renderleaderboard();
 };

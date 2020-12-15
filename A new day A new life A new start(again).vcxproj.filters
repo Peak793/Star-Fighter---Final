@@ -105,6 +105,15 @@
     <ClCompile Include="SheildRing.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Asteriod.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="warningSign.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="spawnAsteroid.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -176,5 +185,19 @@
     <ClInclude Include="SheildRing.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Asteriod.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="warningSign.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="spawnAsteroid.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="leaderboard.txt">
+      <Filter>Source Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AddExplo.cpp" />
+    <ClCompile Include="Asteriod.cpp" />
     <ClCompile Include="Background.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Collision.cpp" />
@@ -39,13 +40,16 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Sheild.cpp" />
     <ClCompile Include="SheildRing.cpp" />
+    <ClCompile Include="spawnAsteroid.cpp" />
     <ClCompile Include="SpawnEbullet.cpp" />
     <ClCompile Include="SpawnEnemies.cpp" />
     <ClCompile Include="UI.cpp" />
     <ClCompile Include="Ulti.cpp" />
+    <ClCompile Include="warningSign.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AddExplo.h" />
+    <ClInclude Include="Asteriod.h" />
     <ClInclude Include="Background.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="Collision.h" />
@@ -64,10 +68,15 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="Sheild.h" />
     <ClInclude Include="SheildRing.h" />
+    <ClInclude Include="spawnAsteroid.h" />
     <ClInclude Include="SpawnEbullet.h" />
     <ClInclude Include="SpawnEnemies.h" />
     <ClInclude Include="UI.h" />
     <ClInclude Include="Ulti.h" />
+    <ClInclude Include="warningSign.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="leaderboard.txt" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

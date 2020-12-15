@@ -49,7 +49,7 @@ void Menu::render(sf::RenderTarget &target)
 int Menu::update(float &state,sf::RenderWindow &window,float dt)
 {
 		Move();
-		updateLogo();
+		updateLogo(state);
 		return (pressMenu(state,window,dt));
 }
 
@@ -142,7 +142,7 @@ void Menu::initLogo(float Width, float Height)
 
 }
 
-void Menu::updateLogo()
+void Menu::updateLogo(float state)
 {
 		if (updatelogo <= 0)
 		{
@@ -163,6 +163,11 @@ void Menu::updateLogo()
 				FontSelect = !FontSelect;
 			}
 			updatelogo -= (rand() % 100);
+		}
+		
+		if (state != 0)
+		{
+			clock.restart();
 		}
 }
 

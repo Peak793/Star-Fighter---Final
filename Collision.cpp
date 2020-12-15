@@ -53,7 +53,7 @@ void Collision::bulletAndenemies(Fire& B, SpawnEnemies& E,int &score,AddExplo &A
 	}
 }
 
-void Collision::EbulletAndPlayer(Player& player, SpawnEbullet& EB,float state)
+void Collision::EbulletAndPlayer(Player& player, SpawnEbullet& EB,float &state)
 {
 	if(player.isSheildOn == false)
 	for (int i = 0; i < EB.Ebullets.size(); i++)
@@ -85,7 +85,7 @@ void Collision::EbulletAndPlayer(Player& player, SpawnEbullet& EB,float state)
 		player.hp = 0;
 }
 
-void Collision::EnemiesAndPlayer(Player& player, SpawnEnemies& E,AddExplo &ADEX,sf::Texture &texture)
+void Collision::EnemiesAndPlayer(Player& player, SpawnEnemies& E,AddExplo &ADEX,sf::Texture &texture,float &state)
 {
 	if (player.isSheildOn == false)
 	{
@@ -96,6 +96,10 @@ void Collision::EnemiesAndPlayer(Player& player, SpawnEnemies& E,AddExplo &ADEX,
 				E.enemies[i].hp = 0;
 				if (player.hp > 0)
 					player.hp -= E.enemies[i].damage;
+				if(player.hp == 0)
+				{
+					state = 3;
+				}
 				if (E.enemies[i].hp <= 0)
 				{
 					ADEX.DeadAni(texture, E.enemies[i].getPos());
@@ -170,7 +174,7 @@ void Collision::itemAndPlayer(Player& player, itemDropping& drop)
 	}
 }
 
-void Collision::ultiAndEbullet(Fire& bullet, SpawnEbullet& EB)
+void Collision::ultiAndEbullet(Fire& bullet, SpawnEbullet& EB,spawnAsteroid &asteriod,AddExplo &ADEX,sf::Texture &texture)
 {
 	for (int i = 0; i < bullet.ultis.size(); i++)
 	{
@@ -181,6 +185,44 @@ void Collision::ultiAndEbullet(Fire& bullet, SpawnEbullet& EB)
 				EB.Ebullets.erase(EB.Ebullets.begin()+j);
 				break;
 			}
+		}
+	}
+	for (int i = 0; i < bullet.ultis.size(); i++)
+	{
+		for (int j = 0; j < asteriod.asteroid.size(); j++)
+		{
+			if (bullet.ultis[i].ulti.getGlobalBounds().intersects(asteriod.asteroid[j].asteroid.getGlobalBounds()))
+			{
+				ADEX.DeadAni(texture, asteriod.asteroid[j].asteroid.getPosition());
+				asteriod.asteroid.erase(asteriod.asteroid.begin() + j);
+			}
+		}
+	}
+}
+
+void Collision::asteroidAndplayer(Player& player, spawnAsteroid &asteroid,AddExplo &ADEX,sf::Texture &texture,float &state)
+{
+	for (int i = 0; i < asteroid.asteroid.size(); i++)
+	{
+		for (int j = 0; j < player.Sheild.size(); j++)
+		{
+			if (asteroid.asteroid[i].asteroid.getGlobalBounds().intersects(player.Sheild[j].getGlobalBounds()))
+			{
+				ADEX.DeadAni(texture, asteroid.asteroid[i].asteroid.getPosition());
+				asteroid.asteroid.erase(asteroid.asteroid.begin() + i);
+				state = 3;
+				break;
+			}
+		}
+	}
+	for (int i = 0; i < asteroid.asteroid.size(); i++)
+	{
+		if (asteroid.asteroid[i].asteroid.getGlobalBounds().intersects(player.getGlobalbounds()) and player.ishit == false)
+		{
+			ADEX.DeadAni(texture,asteroid.asteroid[i].asteroid.getPosition());
+			asteroid.asteroid.erase(asteroid.asteroid.begin()+i);
+			player.hp = 0;
+			state = 3;
 		}
 	}
 }

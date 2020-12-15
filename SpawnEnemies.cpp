@@ -39,7 +39,6 @@ void SpawnEnemies::update(float dt, float width, sf::Texture& texture,float game
 		totalTime2 -= spawnCooldown;
 		if (enemiesCount < maxEnemiesCount)
 		{
-			std::cout << "WASD" << std::endl;
 			enemies.push_back(Enemy(texture, sf::Vector2f(32 + (rand() % 536), 64 + (rand() % 5 * 64)), gameLV));
 			enemiesCount++;
 		}
